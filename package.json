@@ -1,0 +1,35 @@
+{
+  "name": "zinnober-thunder",
+  "version": "1.0.0",
+  "description": "Social media aggregator",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZinnoberThunder/ZinnoberThunder.git"
+  },
+  "author": "Christian Everett, Nick Stobie, Alex McLean, Kurt Weiberth",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ZinnoberThunder/ZinnoberThunder/issues"
+  },
+  "homepage": "https://github.com/ZinnoberThunder/ZinnoberThunder#readme",
+  "dependencies": {
+    "babelify": "^7.2.0",
+    "browserify": "^12.0.1",
+    "chai": "^3.4.1",
+    "express": "^4.13.3",
+    "flux": "^2.1.1",
+    "gulp": "^3.9.0",
+    "history": "^1.13.0",
+    "kerberos": "0.0.17",
+    "mocha": "^2.3.3",
+    "mongoose": "^4.2.5",
+    "passport": "^0.3.2",
+    "react": "^0.14.2",
+    "react-router": "^1.0.0"
+  }
+}
