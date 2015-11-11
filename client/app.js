@@ -1,2 +1,2 @@
 // renders to /dist/index.html -->  <div id="app">
-console.log('testing out git workflow');
+console.log('oh shit its a merge conflict');
