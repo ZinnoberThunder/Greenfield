@@ -132,8 +132,8 @@ app.post('/api/signup', function (req, res, next) {
 app.post('/api/login', function (req, res, next) {
   passport.authenticate('local', function (request, response){
     res.redirect('/');
+    console.log('Login data: ' + request.body);
   });
-  console.log('Login data: ' + req.body);
 });
 
 // /createOrg  --  POST
@@ -145,4 +145,4 @@ app.post('/api/createOrg', function (req, res, next) {
 app.listen(port);
 console.log('Server now listening on port ' + port);
 
-User.addUser('Alex', 'hello', 'alexmclean206@berkeley.edu');
+//User.addUser('Alex', 'hello', 'alexmclean206@berkeley.edu');
