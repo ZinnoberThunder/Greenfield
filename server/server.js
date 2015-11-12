@@ -37,12 +37,7 @@ app.use(express.static('./dist'));
 //  GET Routes
 //
 
-app.get('/auth/facebook',
-  passport.authenticate('facebook'),
-  function (req,res) {
-
-  }
-});
+app.get('/auth/facebook', passport.authenticate('facebook'), function (req,res) {});
 
 app.get('/auth/facebook/callback'),
   passport.authenticate('facebook', failureRedirect: '/api/login'),
