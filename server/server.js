@@ -65,6 +65,8 @@ passport.use(new FacebookStrategy({
     // asynchronous verification, for effect...
     process.nextTick(function () {
       console.log("grabbed FB profile ", profile);
+      console.log("accessToken, " accessToken);
+      console.log("refreshToken", refreshToken);
       // To keep the example simple, the user's Facebook profile is returned to
       // represent the logged-in user.  In a typical application, you would want
       // to associate the Facebook account with a user record in your database,
@@ -79,8 +81,7 @@ app.get('/auth/facebook', passport.authenticate('facebook'), function (req,res) 
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', {failureRedirect: '/api/login'}),
   function (req, res) {
-    console.log('REQUEST ---- ' + req);
-    console.log('RESPONSE ---- ' + res);
+    console.log(req.body);
     res.redirect('/');
   }
 );
