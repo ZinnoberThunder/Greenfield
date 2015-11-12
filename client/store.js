@@ -39,6 +39,9 @@ dispatcher.register(function(payload){
       updateUser(action.data);
       store.emit(CHANGE_EVENT);
       break;
+    // add case for LOAD_ORG
+      // updateOrg in store
+      //
     default:
       return true;
   }

@@ -14,6 +14,16 @@ var actions = {
         }
       }
     })
+  },
+
+  loadOrg: function(orgName) {
+    // send ajax get with org name
+
+    // on success:
+
+    // dispatcher handle action
+      // type is LOAD_ORG
+      // data is orgInfo from server
   }
 
 };

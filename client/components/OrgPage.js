@@ -7,6 +7,12 @@ var OrgPageMemberList = require('./OrgPageMemberList');
 
 var OrgPage = React.createClass({
 
+  componentDidMount: function() {
+    // pull out this.props.params.orgName
+
+    // call action loadOrg
+  },
+
   getInitialState: function() {
     return {
       organization: store.getStore().organization
