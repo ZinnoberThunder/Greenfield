@@ -39,13 +39,14 @@ app.use(express.static('./dist'));
 
 app.get('/auth/facebook', passport.authenticate('facebook'), function (req,res) {});
 
-app.get('/auth/facebook/callback'),
-  passport.authenticate('facebook', failureRedirect: '/api/login'),
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', {failureRedirect: '/api/login'}),
   function (req, res) {
     console.log('REQUEST ---- ' + req);
     console.log('RESPONSE ---- ' + res);
     res.redirect('/');
   }
+);
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -73,11 +74,7 @@ passport.use(new FacebookStrategy({
   }
 ));
 
-app.get('/auth/facebook', passport.authenticate('facebook'),
-  function (req,res) {
-
-  }
-);
+app.get('/auth/facebook', passport.authenticate('facebook'), function (req,res) {});
 
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', {failureRedirect: '/api/login'}),
@@ -85,7 +82,8 @@ app.get('/auth/facebook/callback',
     console.log('REQUEST ---- ' + req);
     console.log('RESPONSE ---- ' + res);
     res.redirect('/');
-  });
+  }
+);
 
 // /users/:userId  --  GET
 app.get('/api/users/:id', function (req, res, next) {
