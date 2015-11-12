@@ -3,7 +3,7 @@ var express = require('express');
 var util = require('util');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var path = require('path');
-var session = require('express.session');
+var session = require('express-sessions');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var methodOverride = require('method-override');
@@ -27,20 +27,20 @@ app.use(express.static('./dist'));
 //  GET Routes
 //
 
-app.get('/auth/facebook',
-  passport.authenticate('facebook'),
-  function (req,res) {
+// app.get('/auth/facebook',
+//   passport.authenticate('facebook'),
+//   function (req,res) {
 
-  }
-});
+//   }
+// });
 
-app.get('/auth/facebook/callback'),
-  passport.authenticate('facebook', failureRedirect: '/api/login'),
-  function (req, res) {
-    console.log('REQUEST ---- ' + req);
-    console.log('RESPONSE ---- ' + res);
-    res.redirect('/');
-  }
+// app.get('/auth/facebook/callback'),
+//   passport.authenticate('facebook', failureRedirect: '/api/login'),
+//   function (req, res) {
+//     console.log('REQUEST ---- ' + req);
+//     console.log('RESPONSE ---- ' + res);
+//     res.redirect('/');
+//   }
 
 // /users/:userId  --  GET
 app.get('/api/users/:id', function (req, res, next) {
