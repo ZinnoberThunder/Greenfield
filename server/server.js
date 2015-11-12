@@ -3,6 +3,7 @@ var express = require('express');
 var util = require('util');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
+var LocalStrategy = require('passport-local').Strategy;
 var path = require('path');
 var session = require('express-session');
 var bodyParser = require('body-parser');
@@ -37,6 +38,23 @@ app.use(express.static('./dist'));
 //  GET Routes
 //
 
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    console.log("username", username);
+    console.log("password", password);
+    User.findOne({ username: username }, function(err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    });
+  }
+));
+/*
 app.get('/auth/facebook', passport.authenticate('facebook'), function (req,res) {});
 
 app.get('/auth/facebook/callback',
@@ -47,7 +65,7 @@ app.get('/auth/facebook/callback',
     res.redirect('/');
   }
 );
-
+*/
 passport.serializeUser(function(user, done) {
   done(null, user);
 });
@@ -55,16 +73,19 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
-
+/*
 passport.use(new FacebookStrategy({
     clientID: FACEBOOK_APP_ID,
     clientSecret: FACEBOOK_APP_SECRET,
-    callbackURL: "http://zthunder.herokuapp.com/auth/facebook/callback"
+    callbackURL: "http://zthunder.herokuapp.com/auth/facebook/callback",
+    profileFields: ['email', 'profileUrl']
   },
   function(accessToken, refreshToken, profile, done) {
     // asynchronous verification, for effect...
     process.nextTick(function () {
       console.log("grabbed FB profile ", profile);
+      console.log("accessToken ", accessToken);
+      console.log("refreshToken", refreshToken);
       // To keep the example simple, the user's Facebook profile is returned to
       // represent the logged-in user.  In a typical application, you would want
       // to associate the Facebook account with a user record in your database,
@@ -79,12 +100,11 @@ app.get('/auth/facebook', passport.authenticate('facebook'), function (req,res) 
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', {failureRedirect: '/api/login'}),
   function (req, res) {
-    console.log('REQUEST ---- ' + req);
-    console.log('RESPONSE ---- ' + res);
+    console.log(req.body);
     res.redirect('/');
   }
 );
-
+*/
 // /users/:userId  --  GET
 app.get('/api/users/:id', function (req, res, next) {
   console.log('User ID: ' + req.params.id);
@@ -111,9 +131,11 @@ app.post('/api/signup', function (req, res, next) {
 });
 
 // /login  --  POST
-app.post('/api/login', function (req, res, next) {
-  console.log('Login data: ' + req.body);
-});
+app.post('/api/login', passport.authenticate('local'), function (request, response){
+    res.redirect('/');
+    console.log('Login data: ' + request.body);
+  }
+);
 
 // /createOrg  --  POST
 app.post('/api/createOrg', function (req, res, next) {
@@ -123,3 +145,5 @@ app.post('/api/createOrg', function (req, res, next) {
 
 app.listen(port);
 console.log('Server now listening on port ' + port);
+
+//User.addUser('Alex', 'hello', 'alexmclean206@berkeley.edu');
