@@ -2,7 +2,7 @@
 // Exports:
 // 
 // User
-//  .addUser( username, password, email )  -->  new user id
+//  .addUser( username, password, email )  -->  returns true
 //
 
 var mongoose = require('mongoose');
@@ -37,7 +37,24 @@ module.exports.addUser = function (username, password, email) {
     if (err) {
       throw err;
     } else {
-      return newUser._id;
+      return true;
     }
   });
 };
+
+module.exports.removeUser = function (username) {
+  User.remove({ username: username }, function (err) {
+    if (err) {
+      throw err;
+    }
+  });
+}
+
+module.exports.getUser = function (username) {
+  var user = [];
+  User.findOne( { username: username } ).exec(function (err, results) {
+    results.forEach(function (result) {
+      user.push(result);
+    })
+  })
+}
