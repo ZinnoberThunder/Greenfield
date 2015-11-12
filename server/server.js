@@ -23,7 +23,7 @@ var Account = require('./db/models/account');
 app.use(cookieParser());
 app.use(bodyParser());
 app.use(methodOverride());
-app.use(session({ secret: 'keyboard cat' }));
+app.use(session());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static('./dist'));
