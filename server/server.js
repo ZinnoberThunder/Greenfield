@@ -65,7 +65,7 @@ passport.use(new FacebookStrategy({
     // asynchronous verification, for effect...
     process.nextTick(function () {
       console.log("grabbed FB profile ", profile);
-      console.log("accessToken, " accessToken);
+      console.log("accessToken ", accessToken);
       console.log("refreshToken", refreshToken);
       // To keep the example simple, the user's Facebook profile is returned to
       // represent the logged-in user.  In a typical application, you would want
