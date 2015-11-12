@@ -129,10 +129,10 @@ app.post('/api/signup', function (req, res, next) {
 });
 
 // /login  --  POST
-app.post('/api/login', passport.authenticate('local', function (request, response){
+app.post('/api/login', passport.authenticate('local'), function (request, response){
     res.redirect('/');
     console.log('Login data: ' + request.body);
-  });
+  }
 );
 
 // /createOrg  --  POST
