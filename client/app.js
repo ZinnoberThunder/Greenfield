@@ -1,11 +1,24 @@
-// renders to /dist/index.html -->  <div id="app">
-console.log('oh shit its a merge conflict');
-
 var React = require('react');
 var ReactDOM = require('react-dom');
 var App = require('./components/App');
+var UserPage = require('./components/UserPage');
+var OrgPage = require('./components/OrgPage');
+var Router = require('react-router').Router;
+var Route = require('react-router').Route;
+var createHistory = require('history').createHistory;
+var useBasename = require('history').useBasename;
+
+console.log(createHistory);
+console.log(useBasename);
+// var history = useBasename(createHistory)({basename: '/'});
+var history = createHistory();
 
 ReactDOM.render(
-  <App />,
+  <Router history={history}>
+    <Route path="/" component={App}>
+      <Route path="user" component={UserPage} />
+      <Route path="org" component={OrgPage} />
+    </Route>
+  </Router>,
   document.getElementById('app')
 );

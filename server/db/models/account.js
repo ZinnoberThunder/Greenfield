@@ -5,6 +5,6 @@ var accountSchema = mongoose.Schema({
   url: { type: String, required: true }
 });
 
-var Account = mongoose.model('Account', accuontSchema);
+var Account = mongoose.model('Account', accountSchema);
 
 module.exports = Account;
