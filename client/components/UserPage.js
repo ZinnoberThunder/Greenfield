@@ -4,8 +4,6 @@ var store = require('../store');
 var UserPageHeader = require('./UserPageHeader');
 var UserPageAccountList = require('./UserPageAccountList');
 var UserPageOrgList = require('./UserPageOrgList');
-var Link = require('react-router').Link;
-
 
 var UserPage = React.createClass({
 

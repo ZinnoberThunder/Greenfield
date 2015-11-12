@@ -8,7 +8,11 @@ var _store = {
   user: {
     name: 'kurt',
     accounts: ['facebook', 'linkedin'],
-    orgs: ['HR34']
+    orgs: ['HR34'],
+  },
+  organization: {
+    name: 'HR34',
+    members: [{name: 'nick', accounts: ['facebook', 'linkedin']}]//, {'kurt': ['facebook', 'twitter']}, {'alex': ['facebook', 'linkedin', 'myspace']}, {'christian': ['facebook', 'instagram']}]
   }
 };
 
