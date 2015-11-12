@@ -1,6 +1,7 @@
 var express = require('express');
 // var rewrite = require('express-urlrewrite');
 var util = require('util');
+var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var path = require('path');
 //var session = require('express-sessions');
