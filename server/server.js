@@ -62,20 +62,19 @@ passport.use(new FacebookStrategy({
   }
 ));
 
-app.get('/auth/facebook',
-  passport.authenticate('facebook'),
+app.get('/auth/facebook', passport.authenticate('facebook'),
   function (req,res) {
 
   }
-});
+);
 
-app.get('/auth/facebook/callback'),
+app.get('/auth/facebook/callback',
   passport.authenticate('facebook', failureRedirect: '/api/login'),
   function (req, res) {
     console.log('REQUEST ---- ' + req);
     console.log('RESPONSE ---- ' + res);
     res.redirect('/');
-  }
+  });
 
 // /users/:userId  --  GET
 app.get('/api/users/:id', function (req, res, next) {
