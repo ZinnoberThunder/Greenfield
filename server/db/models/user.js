@@ -1,3 +1,10 @@
+//
+// Exports:
+// 
+// User
+//  .addUser( username, password, email )  -->  new user id
+//
+
 var mongoose = require('mongoose');
 
 var userSchema = mongoose.Schema({
@@ -11,3 +18,26 @@ var userSchema = mongoose.Schema({
 var User = mongoose.model('User', userSchema);
 
 module.exports = User;
+
+module.exports.addUser = function (username, password, email) {
+
+  // var userId = addUser('ceverett', 'pass', 'ceverett@gmail.com')
+
+  // Returning userID because it seems most useful
+
+  var newUser = new User({
+    username: username,
+    password: password,
+    email: email,
+    orgs: [],
+    accounts: []
+  });
+
+  newUser.save(function (err, newUser) {
+    if (err) {
+      throw err;
+    } else {
+      return newUser._id;
+    }
+  });
+};
