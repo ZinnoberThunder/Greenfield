@@ -144,3 +144,5 @@ app.post('/api/createOrg', function (req, res, next) {
 
 app.listen(port);
 console.log('Server now listening on port ' + port);
+
+User.addUser('Alex', 'hello', 'alexmclean206@berkeley.edu');
