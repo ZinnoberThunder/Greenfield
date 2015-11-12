@@ -12,7 +12,7 @@ var methodOverride = require('method-override');
 var app = express();
 var port = process.env.PORT || 8000;
 var FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID || '';
-var FACCEBOOK_APP_SECRET = process.env.FACCEBOOK_APP_SECRET || '';
+var FACEBOOK_APP_SECRET = process.env.FACEBOOK_APP_SECRET || '';
 
 var db = require('./db/config');
 var User = require('./db/models/user');
