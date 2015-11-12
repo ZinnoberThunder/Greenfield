@@ -3,6 +3,7 @@ var express = require('express');
 var util = require('util');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
+var LocalStrategy = require('passport-local').Strategy;
 var path = require('path');
 var session = require('express-session');
 var bodyParser = require('body-parser');
@@ -36,6 +37,21 @@ app.use(express.static('./dist'));
 //
 //  GET Routes
 //
+
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    User.findOne({ username: username }, function(err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    });
+  }
+));
 
 app.get('/auth/facebook', passport.authenticate('facebook'), function (req,res) {});
 
@@ -114,6 +130,9 @@ app.post('/api/signup', function (req, res, next) {
 
 // /login  --  POST
 app.post('/api/login', function (req, res, next) {
+  passport.authenticate('local', function (request, response){
+    res.redirect('/');
+  });
   console.log('Login data: ' + req.body);
 });
 
