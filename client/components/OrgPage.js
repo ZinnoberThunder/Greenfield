@@ -7,8 +7,7 @@ var OrgPage = React.createClass({
 
     return (
       <div>
-        <h1>This is the OrgPage</h1>
-        <Link to="/user">Click to go back to UserPage</Link>
+        <h3>This is the OrgPage</h3>
       </div>
     )
   }

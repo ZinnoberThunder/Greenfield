@@ -5,7 +5,11 @@ var EventEmitter = require('events').EventEmitter;
 var CHANGE_EVENT = 'change';
 
 var _store = {
-  user: 'kurt'
+  user: {
+    name: 'kurt',
+    accounts: ['facebook', 'linkedin'],
+    orgs: ['HR34']
+  }
 };
 
 var updateUser = function(data) {

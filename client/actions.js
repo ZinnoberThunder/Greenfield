@@ -7,7 +7,11 @@ var actions = {
     dispatcher.handleAction({
       actionType: 'UPDATE_USER',
       data: {
-        user: 'nick'
+        user: {
+          name: 'nick',
+          accounts: ['facebook', 'twitter'],
+          orgs: ['HR34']
+        }
       }
     })
   }

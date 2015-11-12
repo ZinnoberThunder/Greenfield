@@ -6,11 +6,7 @@ var OrgPage = require('./components/OrgPage');
 var Router = require('react-router').Router;
 var Route = require('react-router').Route;
 var createHistory = require('history').createHistory;
-var useBasename = require('history').useBasename;
 
-console.log(createHistory);
-console.log(useBasename);
-// var history = useBasename(createHistory)({basename: '/'});
 var history = createHistory();
 
 ReactDOM.render(
