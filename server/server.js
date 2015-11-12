@@ -59,7 +59,8 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new FacebookStrategy({
     clientID: FACEBOOK_APP_ID,
     clientSecret: FACEBOOK_APP_SECRET,
-    callbackURL: "http://zthunder.herokuapp.com/auth/facebook/callback"
+    callbackURL: "http://zthunder.herokuapp.com/auth/facebook/callback",
+    profileFields: ['email', 'profileUrl']
   },
   function(accessToken, refreshToken, profile, done) {
     // asynchronous verification, for effect...
