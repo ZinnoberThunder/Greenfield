@@ -1,4 +1,6 @@
 var express = require('express');
+// var rewrite = require('express-urlrewrite');
+var path = require('path');
 
 var app = express();
 var port = process.env.PORT || 8000;
@@ -9,6 +11,10 @@ var Org = require('./db/models/org');
 var Account = require('./db/models/account');
 
 app.use(express.static('./dist'));
+
+app.get('*', function (request, response){
+  response.sendFile(path.resolve(__dirname, '..', 'dist', 'index.html'));
+});
 
 // /users/:userId  --  GET
 app.get('/api/users/:id', function (req, res, next) {
