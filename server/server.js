@@ -1,6 +1,12 @@
 var express = require('express');
+
 var app = express();
 var port = process.env.PORT || 8000;
+
+var db = require('./db/config');
+var User = require('./db/models/user');
+var Org = require('./db/models/org');
+var Account = require('./db/models/account');
 
 app.use(express.static('./dist'));
 
