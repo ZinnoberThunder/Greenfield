@@ -23,7 +23,7 @@ var Account = require('./db/models/account');
 app.use(cookieParser());
 app.use(bodyParser());
 app.use(methodOverride());
-app.use(session({}));
+app.use(session({secret: 'zthunder'}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static('./dist'));
