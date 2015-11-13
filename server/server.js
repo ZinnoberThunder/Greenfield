@@ -116,7 +116,11 @@ app.get('/api/orgs/:id', function (req, res, next) {
 });
 
 app.get('*', function (request, response){
-  response.sendFile(path.resolve(__dirname, '..', 'dist', 'index.html'));
+  if (request.url === '/org/bundle.js') {
+    response.sendFile(path.resolve(__dirname, '..', 'dist', 'bundle.js'));
+  } else {
+    response.sendFile(path.resolve(__dirname, '..', 'dist', 'index.html'));
+  }
 });
 
 //
