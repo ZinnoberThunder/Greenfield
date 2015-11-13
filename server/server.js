@@ -12,8 +12,8 @@ var methodOverride = require('method-override');
 
 var app = express();
 var port = process.env.PORT || 8000;
-var FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID || '';
-var FACEBOOK_APP_SECRET = process.env.FACEBOOK_APP_SECRET || '';
+var FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID || '793916147386968';
+var FACEBOOK_APP_SECRET = process.env.FACEBOOK_APP_SECRET || '268975de03f6b689fbffbf182d9281a5';
 
 var db = require('./db/config');
 var User = require('./db/models/user');
@@ -52,7 +52,7 @@ passport.use(new LocalStrategy(
   })
   }
 ));
-/*
+
 app.get('/auth/facebook', passport.authenticate('facebook'), function (req,res) {});
 
 app.get('/auth/facebook/callback',
@@ -63,7 +63,7 @@ app.get('/auth/facebook/callback',
     res.redirect('/');
   }
 );
-*/
+
 passport.serializeUser(function(user, done) {
   done(null, user);
 });
@@ -71,7 +71,7 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
-/*
+
 passport.use(new FacebookStrategy({
     clientID: FACEBOOK_APP_ID,
     clientSecret: FACEBOOK_APP_SECRET,
@@ -102,7 +102,7 @@ app.get('/auth/facebook/callback',
     res.redirect('/');
   }
 );
-*/
+
 // /users/:userId  --  GET
 app.get('/api/users/:id', function (req, res, next) {
   console.log('User ID: ' + req.params.id);
