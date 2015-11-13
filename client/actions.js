@@ -52,14 +52,10 @@ var actions = {
     $.ajax({
       type: "POST",
       url: '/api/login',
-      dataType: 'json',
-      data: JSON.stringify(accInfo),
-      error: function(err) {
-        console.log(err);
+      data: accInfo,
+      success: function(response){
+        actions.loadUser(response)
       },
-      success: function(res){
-        actions.loadUser(res.user); // what will response look like?
-      }
     });
 
   },
