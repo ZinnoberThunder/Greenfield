@@ -30,8 +30,8 @@ var Account = require('./db/models/account');
 
 var app = express();
 var port = process.env.PORT || 8000;
-var FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID || '';
-var FACEBOOK_APP_SECRET = process.env.FACEBOOK_APP_SECRET || '';
+var FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID || '793916147386968';
+var FACEBOOK_APP_SECRET = process.env.FACEBOOK_APP_SECRET || '268975de03f6b689fbffbf182d9281a5';
 
 //
 //  Middleware
