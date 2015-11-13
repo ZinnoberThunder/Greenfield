@@ -3,14 +3,22 @@ var Link = require('react-router').Link;
 var store = require('../store');
 var OrgPageMemberList = require('./OrgPageMemberList');
 
-
-
 var OrgPage = React.createClass({
 
-  componentDidMount: function() {
-    // pull out this.props.params.orgName
+  onStoreChange: function() {
+    this.setState({
+      organization: store.getStore().organization
+    });
+  },
 
-    // call action loadOrg
+  componentDidMount: function() {
+    console.log(this.props.params.orgName);
+    store.addChangeListener(this.onStoreChange);
+    // actions.loadOrg(this.props.params.orgName);
+  },
+
+  componentWillUnmount: function(){
+    store.removeChangeListener(this.onStoreChange);
   },
 
   getInitialState: function() {

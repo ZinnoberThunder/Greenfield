@@ -11,7 +11,7 @@ var _store = {
     orgs: ['HR34'],
   },
   organization: {
-    name: 'HR34',
+    name: 'nick org',
     members: [{name: 'nick', accounts: ['facebook', 'linkedin']}]//, {'kurt': ['facebook', 'twitter']}, {'alex': ['facebook', 'linkedin', 'myspace']}, {'christian': ['facebook', 'instagram']}]
   }
 };

@@ -7,7 +7,7 @@ var UserPageOrgList = require('./UserPageOrgList');
 
 var UserPage = React.createClass({
 
-  updateUser: function() {
+  onStoreChange: function() {
     this.setState({
       user: store.getStore().user
     });
@@ -18,11 +18,11 @@ var UserPage = React.createClass({
   },
 
   componentDidMount: function() {
-    store.addChangeListener(this.updateUser);
+    store.addChangeListener(this.onStoreChange);
   },
 
   componentWillUnmount: function(){
-    store.removeChangeListener(this.updateUser);
+    store.removeChangeListener(this.onStoreChange);
   },
 
   getInitialState: function() {
