@@ -16,9 +16,15 @@ var _store = {
   }
 };
 
+//for testing puposes, may still need this when users add new account
 var updateUser = function(data) {
   _store.user = data.user;
 };
+
+var loginUser = function(data){
+  //update when you figure out the structure of the data
+  _store.user = data
+}
 
 var store = assign({}, EventEmitter.prototype, {
   addChangeListener: function(cb){
@@ -37,6 +43,10 @@ dispatcher.register(function(payload){
   switch(action.actionType){
     case 'UPDATE_USER':
       updateUser(action.data);
+      store.emit(CHANGE_EVENT);
+      break;
+    case 'LOGIN_USER':
+      loginUser(action.data);
       store.emit(CHANGE_EVENT);
       break;
     // add case for LOAD_ORG
