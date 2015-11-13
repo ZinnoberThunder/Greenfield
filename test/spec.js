@@ -22,8 +22,17 @@ describe('HTTP', function() {
 
   describe('GET /', function(){
     it('should get /', function(done){
-      request(app)
+      request(server)
         .get('/')
+        .expect(200, done);
+    })
+  })
+
+  describe('POST /api/login', function(){
+    it('should login to auth/login', function(done){
+      request(server)
+        .post('auth/login')
+        .send({ username: 'testUser', password: 'testPass' })
         .expect(200, done);
     })
   })
