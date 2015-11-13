@@ -71,7 +71,7 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
-/*
+
 passport.use(new FacebookStrategy({
     clientID: FACEBOOK_APP_ID,
     clientSecret: FACEBOOK_APP_SECRET,
@@ -102,7 +102,7 @@ app.get('/auth/facebook/callback',
     res.redirect('/');
   }
 );
-*/
+
 // /users/:userId  --  GET
 app.get('/api/users/:id', function (req, res, next) {
   console.log('User ID: ' + req.params.id);
