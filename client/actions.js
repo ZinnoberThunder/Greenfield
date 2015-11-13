@@ -61,6 +61,7 @@ var actions = {
   },
 
   loadUser: function(user) {
+    //nothing
     dispatcher.handleAction({
       actionType: 'LOAD_USER',
       data: user
