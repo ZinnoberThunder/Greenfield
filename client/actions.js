@@ -33,11 +33,11 @@ var actions = {
     $.ajax({
       type: "POST",
       url: '/api/signup',
-      data: JSON.stringify(accInfo),
+      data: accInfo,
       success: function(response){
         actions.loadUser(response)
-      },
-      dataType: 'json'
+      }
+
     });
   },
 
