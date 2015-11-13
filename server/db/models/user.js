@@ -67,7 +67,7 @@ var User = mongoose.model('User', userSchema);
 
 module.exports = User;
 
-module.exports.addUser = function (username, password, email) {
+module.exports.addUser = function (username, password, email, cb) {
 
   // var userId = addUser('ceverett', 'pass', 'ceverett@gmail.com')
 
@@ -85,7 +85,7 @@ module.exports.addUser = function (username, password, email) {
     if (err) {
       throw err;
     } else {
-      return true;
+      cb(err, newUser);
     }
   });
 };
