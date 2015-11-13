@@ -8,6 +8,7 @@ var SignupPage = React.createClass({
     var password = document.getElementById("password").value;
     var email = document.getElementById("email").value;
     var accInfo = {email: email, username: username, password: password};
+    console.log(accInfo);
     actions.signupUser(accInfo);
   },
   

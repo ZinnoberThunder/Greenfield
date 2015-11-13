@@ -38,7 +38,10 @@ var FACEBOOK_APP_SECRET = process.env.FACEBOOK_APP_SECRET || '';
 //
 
 app.use(cookieParser());
-app.use(bodyParser());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
 app.use(methodOverride());
 app.use(session({secret: 'zthunder'}));
 app.use(passport.initialize());
@@ -64,7 +67,7 @@ passport.use(new LocalStrategy(
   }
 ));
 
-/*
+
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', {failureRedirect: '/api/login'}),
   function (req, res) {
@@ -73,7 +76,7 @@ app.get('/auth/facebook/callback',
     res.redirect('/');
   }
 );
-*/
+
 passport.serializeUser(function(user, done) {
   done(null, user);
 });
@@ -108,9 +111,9 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
-//
-//  GET Routes
-//
+// //
+// //  GET Routes
+// //
 
 app.get('/auth/facebook', passport.authenticate('facebook'), function (req,res) {});
 
@@ -153,15 +156,13 @@ app.get('*', function (request, response){
 //
 
 app.post('/api/signup', function (req, res, next) {
-  User.addUser({
-    username: req.body.username,
-    password: req.body.password,
-    email: req.body.email, 
+  console.log(req.body);
+  User.addUser(req.body.username, req.body.password, req.body.email, 
     function (err, newUser){
       res.send(newUser);
-    });
-  });
-
+    }
+  );
+  // console.log(res);
 });
 
 app.post('/api/login', passport.authenticate('local'), function (req, res){

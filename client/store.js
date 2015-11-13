@@ -45,7 +45,7 @@ dispatcher.register(function(payload){
       updateUser(action.data);
       store.emit(CHANGE_EVENT);
       break;
-    case 'LOGIN_USER':
+    case 'LOAD_USER':
       loginUser(action.data);
       store.emit(CHANGE_EVENT);
       break;
