@@ -1,11 +1,51 @@
 var sinon = require('sinon');
-var expect = require('chai').expect;
-
+var chai = require('chai')
+var expect = chai.expect;
+var chaiHttp = require('chai-http');
 var mongoose = require('mongoose');
 var db = require('./../server/db/config')
 var User = require('./../server/db/models/User');
 var Org = require('./../server/db/models/Org');
 var Account = require('./../server/db/models/Account');
+
+chai.use(chaiHttp);
+
+describe('HTTP', function() {
+
+  var server = 'http://localhost:8000/';
+
+  describe('#get', function() {
+    it('should get /', function (done) {
+      chai.request(server)
+        .get('/')
+        .then(function (res) {
+          expect(res).to.have.status(200);
+        })
+        .catch(function (err) {
+          throw err;
+        })
+      done();
+    })
+  });
+
+  describe('#post', function() {
+    it('should login to /api/login', function (done) {
+      var agent = chai.request.agent(server)
+      agent
+        .post('/api/login')
+        .send({ username: 'testUser', password: 'testPass' })
+        .then(function (res) {
+          expect(res).to.have.cookie('sessionid');
+          // return agent.get('/')
+          //   .then(function (res) {
+          //      expect(res).to.have.status(200);
+          //   })
+        })
+      done();
+    })
+  })
+
+})
 
 describe('User', function() {
 
@@ -137,10 +177,17 @@ describe('Account', function() {
 //
 // Command line setup for testing
 //
+// var sinon = require('sinon');
+// var chai = require('chai')
+// var expect = chai.expect;
+// var chaiHttp = require('chai-http');
 // var db = require('./server/db/config')
 // var User = require('./server/db/models/User');
 // var Org = require('./server/db/models/Org');
 // var Account = require('./server/db/models/Account');
 // var udata = {username: 'testUser',password: 'testPass',email: 'ceverett@gmail.com'};
+
+
+
 
 
