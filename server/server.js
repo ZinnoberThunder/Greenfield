@@ -1,3 +1,7 @@
+//
+//  Module load
+//
+
 var express = require('express');
 // var rewrite = require('express-urlrewrite');
 var util = require('util');
@@ -9,18 +13,30 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var methodOverride = require('method-override');
+var Q = require('q');
 
-var app = express();
-var port = process.env.PORT || 8000;
-var FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID || '793916147386968';
-var FACEBOOK_APP_SECRET = process.env.FACEBOOK_APP_SECRET || '268975de03f6b689fbffbf182d9281a5';
+//
+//  Database vars
+//
 
 var db = require('./db/config');
 var User = require('./db/models/user');
 var Org = require('./db/models/org');
 var Account = require('./db/models/account');
 
-//Middleware
+//
+//  App vars and API keys
+//
+
+var app = express();
+var port = process.env.PORT || 8000;
+var FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID || '';
+var FACEBOOK_APP_SECRET = process.env.FACEBOOK_APP_SECRET || '';
+
+//
+//  Middleware
+//
+
 app.use(cookieParser());
 app.use(bodyParser());
 app.use(methodOverride());
@@ -29,13 +45,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static('./dist'));
 
-
-
-
-
-
 //
-//  GET Routes
+//  Passport Strategies
 //
 
 passport.use(new LocalStrategy(
@@ -53,14 +64,22 @@ passport.use(new LocalStrategy(
   }
 ));
 
-app.get('/auth/facebook', passport.authenticate('facebook'), function (req,res) {});
-
-app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', {failureRedirect: '/api/login'}),
-  function (req, res) {
-    res.redirect('/');
+passport.use(new FacebookStrategy({
+    clientID: FACEBOOK_APP_ID,
+    clientSecret: FACEBOOK_APP_SECRET,
+    callbackURL: "http://zthunder.herokuapp.com/auth/facebook/callback",
+    profileFields: ['email', 'profileUrl']
+  },
+  function(accessToken, refreshToken, profile, done) {
+    process.nextTick(function () {
+      console.log("grabbed FB profile ", profile);
+      console.log("accessToken ", accessToken);
+      console.log("refreshToken", refreshToken);
+      // TODO - associate returned FB profile with user account
+      return done(null, profile);
+    });
   }
-);
+));
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -70,26 +89,18 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
-passport.use(new FacebookStrategy({
-    clientID: FACEBOOK_APP_ID,
-    clientSecret: FACEBOOK_APP_SECRET,
-    callbackURL: "http://zthunder.herokuapp.com/auth/facebook/callback",
-    profileFields: ['email', 'profileUrl']
-  },
-  function(accessToken, refreshToken, profile, done) {
-    // asynchronous verification, for effect...
-    process.nextTick(function () {
-      console.log("grabbed FB profile ", profile);
-      console.log("accessToken ", accessToken);
-      console.log("refreshToken", refreshToken);
-      // To keep the example simple, the user's Facebook profile is returned to
-      // represent the logged-in user.  In a typical application, you would want
-      // to associate the Facebook account with a user record in your database,
-      // and return that user instead.
-      return done(null, profile);
-    });
+//
+//  GET Routes
+//
+
+app.get('/auth/facebook', passport.authenticate('facebook'), function (req,res) {});
+
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', {failureRedirect: '/api/login'}),
+  function (req, res) {
+    res.redirect('/');
   }
-));
+);
 
 app.get('/auth/facebook', passport.authenticate('facebook'), function (req,res) {});
 
@@ -101,16 +112,12 @@ app.get('/auth/facebook/callback',
   }
 );
 
-// /users/:userId  --  GET
 app.get('/api/users/:id', function (req, res, next) {
   console.log('User ID: ' + req.params.id);
-  //res.end(req.params.id);
 });
 
-// /orgs/:orgId  --  GET
 app.get('/api/orgs/:id', function (req, res, next) {
   console.log('Org ID: ' + req.params.id);
-  //res.end(req.params.id);
 });
 
 app.get('*', function (request, response){
@@ -125,7 +132,6 @@ app.get('*', function (request, response){
 //  POST Routes
 //
 
-// /signup  --  POST
 app.post('/api/signup', function (req, res, next) {
   User.addUser({
     username: req.body.username,
@@ -135,30 +141,26 @@ app.post('/api/signup', function (req, res, next) {
 
 });
 
-// /login  --  POST
 app.post('/api/login', passport.authenticate('local'), function (req, res){
     console.log(passport);
     res.redirect('/');
   }
 );
 
-// /createOrg  --  POST
 app.post('/api/createOrg', function (req, res, next) {
   console.log('New Org data: ' + req.body);
 });
 
+//
+//  Server Start
+//
 
 app.listen(port);
 console.log('Server now listening on port ' + port);
 
-//User.addUser('Alex', 'hello', 'alexmclean206@berkeley.edu');
-
-
-
-
-
-
-
+//
+//  Auth functions
+//
 
 function signin (req, res, next) {
     var username = req.body.username;
@@ -243,3 +245,9 @@ function checkAuth (req, res, next) {
         });
     }
   }
+
+//
+//  Testing data
+//
+
+// User.addUser('Alex', 'hello', 'alexmclean206@berkeley.edu');
