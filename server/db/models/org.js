@@ -14,11 +14,12 @@ var orgSchema = mongoose.Schema({
   admins: { type: Array }
 });
 
+
 var Org = mongoose.model('Org', orgSchema);
 
 module.exports = Org;
 
-module.exports.addOrg = function (name) {
+module.exports.addOrg = function (name, code, cb) {
 
   // addOrg('HR')
 
@@ -26,6 +27,7 @@ module.exports.addOrg = function (name) {
 
   var newOrg = new Org({
     name: name,
+    code: code,
     users: [],
     admins: []
   });
@@ -34,7 +36,7 @@ module.exports.addOrg = function (name) {
     if (err) {
       throw err;
     } else {
-      return true;
+      cb(err, newOrg);
     }
   });
 };
@@ -62,3 +64,5 @@ module.exports.addUserToOrg = function (username, orgName, isAdmin) {
     }
   });
 };
+
+
