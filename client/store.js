@@ -5,7 +5,15 @@ var EventEmitter = require('events').EventEmitter;
 var CHANGE_EVENT = 'change';
 
 var _store = {
-  user: 'kurt'
+  user: {
+    name: 'kurt',
+    accounts: ['facebook', 'linkedin'],
+    orgs: ['HR34'],
+  },
+  organization: {
+    name: 'nick org',
+    members: [{name: 'nick', accounts: ['facebook', 'linkedin']}]//, {'kurt': ['facebook', 'twitter']}, {'alex': ['facebook', 'linkedin', 'myspace']}, {'christian': ['facebook', 'instagram']}]
+  }
 };
 
 var updateUser = function(data) {
@@ -31,6 +39,9 @@ dispatcher.register(function(payload){
       updateUser(action.data);
       store.emit(CHANGE_EVENT);
       break;
+    // add case for LOAD_ORG
+      // updateOrg in store
+      //
     default:
       return true;
   }

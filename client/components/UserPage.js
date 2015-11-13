@@ -1,11 +1,13 @@
 var React = require('react');
-var Link = require('react-router').Link;
 var actions = require('../actions');
 var store = require('../store');
+var UserPageHeader = require('./UserPageHeader');
+var UserPageAccountList = require('./UserPageAccountList');
+var UserPageOrgList = require('./UserPageOrgList');
 
 var UserPage = React.createClass({
 
-  updateUser: function() {
+  onStoreChange: function() {
     this.setState({
       user: store.getStore().user
     });
@@ -16,11 +18,11 @@ var UserPage = React.createClass({
   },
 
   componentDidMount: function() {
-    store.addChangeListener(this.updateUser);
+    store.addChangeListener(this.onStoreChange);
   },
 
   componentWillUnmount: function(){
-    store.removeChangeListener(this.updateUser);
+    store.removeChangeListener(this.onStoreChange);
   },
 
   getInitialState: function() {
@@ -33,10 +35,9 @@ var UserPage = React.createClass({
 
     return (
       <div>
-        <h1>This is the UserPage</h1>
-        <Link to="/org">Click to go back to OrgPage</Link>
-        <div onClick={this.buttonClicked}> Click to change user</div>
-        <div>Current user is: {this.state ? this.state.user: 'no state'}</div>
+        <UserPageHeader user={this.state.user} buttonClicked={this.buttonClicked}/>
+        <UserPageAccountList accounts={this.state.user.accounts}/>
+        <UserPageOrgList orgs={this.state.user.orgs}/>
       </div>
     )
   }
