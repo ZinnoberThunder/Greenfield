@@ -15,7 +15,7 @@ ReactDOM.render(
   <Router history={history}>
     <Route path="/" component={App}>
       <Route path="user" component={UserPage} />
-      <Route path="org/:orgName" component={OrgPage} />
+      <Route path="org" component={OrgPage} />
       <Route path="signup" component={SignupPage} />
       <Route path="login" component={LoginPage} />
     </Route>

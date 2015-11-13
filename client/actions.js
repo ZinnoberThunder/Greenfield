@@ -1,5 +1,6 @@
 var dispatcher = require('./dispatcher');
 var store = require('./store');
+var $ = require('jQuery');
 
 var actions = {
 
@@ -24,6 +25,41 @@ var actions = {
     // dispatcher handle action
       // type is LOAD_ORG
       // data is orgInfo from server
+  },
+
+  signupUser: function(accInfo) {
+
+    // Somewhat guessing on syntax, can't do much testing without db hooked up
+    // $.ajax({
+    //   type: "POST",
+    //   url: '/api/signup',
+    //   data: JSON.stringify(accInfo),
+    //   success: function(response){
+    //     actions.loadUser(response)
+    //   },
+    //   dataType: 'json'
+    // });
+
+    actions.loadUser(accInfo);
+  },
+
+  loginUser: function(accInfo){
+    $.ajax({
+      type: "POST",
+      url: '/api/login',
+      data: JSON.stringify(accInfo),
+      success: function(response){
+        actions.loadUser(response)
+      },
+      dataType: 'json'
+    });
+  },
+
+  loadUser: function(userObj) {
+    dispatcher.handleAction({
+      actionType: 'LOGIN_USER',
+      data: userObj
+    })
   }
 
 };
