@@ -5,16 +5,20 @@ var OrgPageMemberList = React.createClass({
 
   render: function() {
 
-    var memberNodes = this.props.organization.members.map(function(member){
-      return (
-        <OrgPageMember key={member.name} member={member}/>
-      );
-    });
-
     return (
       <div>
         <h4>Members</h4>
-        {memberNodes}
+        
+        {
+
+          this.props.organization.members.map(function(member){
+            return (
+              <OrgPageMember key={member.name} name={member.name} accounts={member.accounts} />
+            )
+          })
+
+        }
+
       </div>
     );
   }

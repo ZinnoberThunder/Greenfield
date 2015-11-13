@@ -8,23 +8,24 @@ var _store = {
   user: {
     name: 'kurt',
     accounts: ['facebook', 'linkedin'],
-    orgs: ['HR34'],
+    orgs: [{name: 'HR34', code: 'hr34'}],
   },
   organization: {
-    name: 'nick org',
-    members: [{name: 'nick', accounts: ['facebook', 'linkedin']}]//, {'kurt': ['facebook', 'twitter']}, {'alex': ['facebook', 'linkedin', 'myspace']}, {'christian': ['facebook', 'instagram']}]
+    code: 'hr34',
+    name: 'HR34',
+    members: [{name: 'Kurt Weiberth', accounts: [{name: 'facebook', url: 'http://facebook.com/kurtweiberth'}]}]
   }
 };
 
 //for testing puposes, may still need this when users add new account
-var updateUser = function(data) {
-  _store.user = data.user;
-};
+// var updateUser = function(data) {
+//   _store.user = data.user;
+// };
 
-var loginUser = function(data){
+var loadUser = function(data){
   //update when you figure out the structure of the data
-  _store.user = data
-}
+  _store.user = data;
+};
 
 var store = assign({}, EventEmitter.prototype, {
   addChangeListener: function(cb){
@@ -46,12 +47,11 @@ dispatcher.register(function(payload){
       store.emit(CHANGE_EVENT);
       break;
     case 'LOAD_USER':
-      loginUser(action.data);
+      loadUser(action.data);
       store.emit(CHANGE_EVENT);
       break;
     // add case for LOAD_ORG
       // updateOrg in store
-      //
     default:
       return true;
   }

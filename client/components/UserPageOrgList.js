@@ -1,21 +1,31 @@
 var React = require('react');
-var Link = require('react-router').Link;
-var UserPageOrg = require('./UserPageOrg')
+var UserPageOrg = require('./UserPageOrg');
+var History = require('react-router').History;
 
 var UserPageOrgList = React.createClass({
 
-  render: function() {
+  mixins: [ History ],
 
-    var orgNodes = this.props.orgs.map(function(org){
-      return (
-        <UserPageOrg key={org} org={org}/>
-      );
-    });
+  navToOrg: function(orgName) {
+    this.history.pushState(null, '/org/' + orgName);
+  },
+
+  render: function() {
 
     return (
       <div>
-        <h4>Organization</h4>
-        {orgNodes}
+        <h4>Organizations!!!</h4>
+
+        {
+
+          this.props.orgs.map(function(org){
+            return (
+              <UserPageOrg navToOrg={this.navToOrg} key={org.code} name={org.name} code={org.code} />
+            )
+          }.bind(this))
+
+        }
+
       </div>
     );
 

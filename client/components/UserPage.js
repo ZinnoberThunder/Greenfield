@@ -13,10 +13,6 @@ var UserPage = React.createClass({
     });
   },
 
-  buttonClicked: function() {
-    actions.loadUser();
-  },
-
   componentDidMount: function() {
     store.addChangeListener(this.onStoreChange);
   },
@@ -28,16 +24,16 @@ var UserPage = React.createClass({
   getInitialState: function() {
     return {
       user: store.getStore().user
-    }
+    };
   },
 
   render: function() {
 
     return (
       <div>
-        <UserPageHeader user={this.state.user} buttonClicked={this.buttonClicked}/>
+        <UserPageHeader user={this.state.user} />
         <UserPageAccountList accounts={this.state.user.accounts}/>
-        <UserPageOrgList orgs={this.state.user.orgs}/>
+        <UserPageOrgList orgs={this.state.user.orgs} />
       </div>
     )
   }

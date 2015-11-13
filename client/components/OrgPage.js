@@ -12,7 +12,6 @@ var OrgPage = React.createClass({
   },
 
   componentDidMount: function() {
-    console.log(this.props.params.orgName);
     store.addChangeListener(this.onStoreChange);
     // actions.loadOrg(this.props.params.orgName);
   },
@@ -24,7 +23,7 @@ var OrgPage = React.createClass({
   getInitialState: function() {
     return {
       organization: store.getStore().organization
-    }
+    };
   },
 
   render: function() {
