@@ -1,21 +1,9 @@
+var auth = require('./auth');
 var dispatcher = require('./dispatcher');
 var store = require('./store');
-var $ = require('jQuery');
+var $ = require('jquery');
 
 var actions = {
-
-  loadUser: function() {
-    dispatcher.handleAction({
-      actionType: 'UPDATE_USER',
-      data: {
-        user: {
-          name: 'nick',
-          accounts: ['facebook', 'twitter'],
-          orgs: ['HR34']
-        }
-      }
-    })
-  },
 
   loadOrg: function(orgName) {
     // send ajax get with org name
@@ -27,37 +15,60 @@ var actions = {
       // data is orgInfo from server
   },
 
-  signupUser: function(accInfo) {
+  signupUser: function(email, username, password) {
 
-    // Somewhat guessing on syntax, can't do much testing without db hooked up
-    $.ajax({
-      type: "POST",
-      url: '/api/signup',
-      data: accInfo,
-      success: function(response){
-        actions.loadUser(response)
-      }
-
-    });
-  },
-
-  loginUser: function(accInfo){
     $.ajax({
       type: "POST",
       url: '/api/login',
-      data: JSON.stringify(accInfo),
-      success: function(response){
-        actions.loadUser(response)
+      dataType: 'json',
+      data: {
+        email: email,
+        username: username,
+        password: password
       },
-      dataType: 'json'
+      error: function(err) {
+        // handle error:
+          // already user?
+          // username already taken?
+        console.log(err);
+      },
+      success: function(res){
+        actions.loadUser(res); // what will response look like?
+      },
     });
+
+    // actions.loadUser(accInfo);
   },
 
-  loadUser: function(userObj) {
+  loginUser: function(username, password){
+    
+    if (auth.isLoggedIn()) {
+      // already logged in, handle this somehow?
+      // maybe with cb?
+      // cb(true);
+      return;
+    }
+
+    $.ajax({
+      type: "POST",
+      url: '/api/login',
+      dataType: 'json',
+      data: JSON.stringify(accInfo),
+      error: function(err) {
+        console.log(err);
+      },
+      success: function(res){
+        actions.loadUser(res.user); // what will response look like?
+      }
+    });
+
+  },
+
+  loadUser: function(user) {
     dispatcher.handleAction({
       actionType: 'LOAD_USER',
-      data: userObj
-    })
+      data: user
+    });
   }
 
 };
