@@ -40,16 +40,16 @@ app.use(express.static('./dist'));
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
-    var user = User.getUser(username)[0];
-    user = user[0];
+    User.findOne({username:username}, function (err, user){
     if (err) { return done(err); }
     if (!user) {
       return done(null, false, { message: 'Incorrect username.' });
     }
-    if (!user.validPassword(user.password)) {
+    if (!user.comparePasswords(user.password)) {
       return done(null, false, { message: 'Incorrect password.' });
     }
     return done(null, user);
+  })
   }
 ));
 /*
