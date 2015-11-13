@@ -8,7 +8,8 @@ var App = React.createClass({
     return (
       <div>
         <Link to="/">Click to go to UserPage</Link><br/>
-        <Link to="/org/hr34">Click to go to OrgPage</Link>
+        <Link to="/org/hr34">Click to go to OrgPage</Link><br/>
+        <Link to="/create">Click to go to CreatePage</Link>
         {this.props.children}
       </div>
     );
