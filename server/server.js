@@ -156,7 +156,10 @@ app.post('/api/signup', function (req, res, next) {
   User.addUser({
     username: req.body.username,
     password: req.body.password,
-    email: req.body.email
+    email: req.body.email, 
+    function (err, newUser){
+      res.send(newUser);
+    });
   });
 
 });
