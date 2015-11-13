@@ -40,18 +40,16 @@ app.use(express.static('./dist'));
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
-    console.log("username", username);
-    console.log("password", password);
-    User.findOne({ username: username }, function(err, user) {
-      if (err) { return done(err); }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      return done(null, user);
-    });
+    var user = User.getUser(username)[0];
+    user = user[0];
+    if (err) { return done(err); }
+    if (!user) {
+      return done(null, false, { message: 'Incorrect username.' });
+    }
+    if (!user.validPassword(user.password)) {
+      return done(null, false, { message: 'Incorrect password.' });
+    }
+    return done(null, user);
   }
 ));
 /*
@@ -131,9 +129,9 @@ app.post('/api/signup', function (req, res, next) {
 });
 
 // /login  --  POST
-app.post('/api/login', passport.authenticate('local'), function (request, response){
+app.post('/api/login', passport.authenticate('local'), function (req, res){
+    console.log(passport);
     res.redirect('/');
-    console.log('Login data: ' + request.body);
   }
 );
 
