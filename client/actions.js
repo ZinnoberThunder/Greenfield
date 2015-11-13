@@ -30,17 +30,15 @@ var actions = {
   signupUser: function(accInfo) {
 
     // Somewhat guessing on syntax, can't do much testing without db hooked up
-    // $.ajax({
-    //   type: "POST",
-    //   url: '/api/signup',
-    //   data: JSON.stringify(accInfo),
-    //   success: function(response){
-    //     actions.loadUser(response)
-    //   },
-    //   dataType: 'json'
-    // });
-
-    actions.loadUser(accInfo);
+    $.ajax({
+      type: "POST",
+      url: '/api/signup',
+      data: JSON.stringify(accInfo),
+      success: function(response){
+        actions.loadUser(response)
+      },
+      dataType: 'json'
+    });
   },
 
   loginUser: function(accInfo){
@@ -57,7 +55,7 @@ var actions = {
 
   loadUser: function(userObj) {
     dispatcher.handleAction({
-      actionType: 'LOGIN_USER',
+      actionType: 'LOAD_USER',
       data: userObj
     })
   }
