@@ -71,7 +71,7 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
-/*
+
 passport.use(new FacebookStrategy({
     clientID: FACEBOOK_APP_ID,
     clientSecret: FACEBOOK_APP_SECRET,
@@ -102,7 +102,7 @@ app.get('/auth/facebook/callback',
     res.redirect('/');
   }
 );
-*/
+
 // /users/:userId  --  GET
 app.get('/api/users/:id', function (req, res, next) {
   console.log('User ID: ' + req.params.id);
@@ -146,7 +146,12 @@ app.post('/api/login', passport.authenticate('local'), function (req, res){
 
 // /createOrg  --  POST
 app.post('/api/createOrg', function (req, res, next) {
+  var orgName = req.body.name;
+  var orgCode = req.body.code;
   console.log('New Org data: ' + req.body);
+  Org.addOrg(orgName, orgCode, function (err, newOrg){
+    res.send(newOrg);
+  });
 });
 
 
