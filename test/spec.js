@@ -8,14 +8,14 @@ var Org = require('./../server/db/models/Org');
 var Account = require('./../server/db/models/Account');
 
 describe('User', function() {
-  describe('#create', function () {
 
-    var data = {
+  var data = {
         username: 'testUser',
         password: 'testPass',
         email: 'ceverett@gmail.com'
       };
 
+  describe('#create', function () {
     before(function (done) {
       User.remove({ username: data.username }, function (err) {
         if (err) {
@@ -36,15 +36,26 @@ describe('User', function() {
       })
     })
   })
+
+  describe('#find', function () {
+    it('finds a user by username', function (done) {
+      User.findOne({ username: data.username }, function(err, user) {
+        expect(user.username).to.eql(data.username);
+        done();
+      });
+    });
+  })
+
+
 });
 
 describe('Org', function() {
-  describe('#create', function () {
 
-    var data = {
+  var data = {
         name: 'testOrg'
       };
 
+  describe('#create', function () {
     before(function (done) {
       Org.remove({ name: data.name }, function (err) {
         if (err) {
@@ -65,19 +76,28 @@ describe('Org', function() {
       })
     })
   })
+
+  describe('#find', function () {
+    it('finds an org by name', function (done) {
+      Org.findOne({ name: data.name }, function(err, org) {
+        expect(org.name).to.eql(data.name);
+        done();
+      });
+    });
+  })
 });
 
 describe('Account', function() {
-  describe('#create', function () {
 
-    var data = {
+  var data = {
         username: 'testUser',
         name: 'facebook',
         url: 'http://facebook.com/testUser'
       };
 
+  describe('#create', function () {
     before(function (done) {
-      Account.remove({ name: data.username }, function (err) {
+      Account.remove({ username: data.username }, function (err) {
         if (err) {
           done(err);
         }
@@ -96,8 +116,31 @@ describe('Account', function() {
       })
     })
   })
+
+  describe('#find', function () {
+    it('finds an account by username', function (done) {
+      Account.findOne({ username: data.username }, function(err, acct) {
+        expect(acct.username).to.eql(data.username);
+        done();
+      });
+    });
+
+    it('finds all accounts by username', function (done) {
+      Account.find({ username: data.username }, function(err, accts) {
+        expect(accts.length).to.eql(1);
+        done();
+      });
+    });
+  })
 });
 
-
+//
+// Command line setup for testing
+//
 // var db = require('./server/db/config')
 // var User = require('./server/db/models/User');
+// var Org = require('./server/db/models/Org');
+// var Account = require('./server/db/models/Account');
+// var udata = {username: 'testUser',password: 'testPass',email: 'ceverett@gmail.com'};
+
+
