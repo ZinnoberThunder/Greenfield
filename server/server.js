@@ -68,14 +68,14 @@ passport.use(new LocalStrategy(
 ));
 
 
-// app.get('/auth/facebook/callback',
-//   passport.authenticate('facebook', {failureRedirect: '/api/login'}),
-//   function (req, res) {
-//     console.log('REQUEST ---- ' + req);
-//     console.log('RESPONSE ---- ' + res);
-//     res.redirect('/');
-//   }
-// );
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', {failureRedirect: '/api/login'}),
+  function (req, res) {
+    console.log('REQUEST ---- ' + req);
+    console.log('RESPONSE ---- ' + res);
+    res.redirect('/');
+  }
+);
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -86,53 +86,53 @@ passport.deserializeUser(function(obj, done) {
 });
 
 
-// passport.use(new FacebookStrategy({
-//     clientID: FACEBOOK_APP_ID,
-//     clientSecret: FACEBOOK_APP_SECRET,
-//     callbackURL: "http://zthunder.herokuapp.com/auth/facebook/callback",
-//     profileFields: ['email', 'profileUrl']
-//   },
-//   function(accessToken, refreshToken, profile, done) {
-//     process.nextTick(function () {
-//       console.log("grabbed FB profile ", profile);
-//       console.log("accessToken ", accessToken);
-//       console.log("refreshToken", refreshToken);
-//       // TODO - associate returned FB profile with user account
-//       return done(null, profile);
-//     });
-//   }
-// ));
+passport.use(new FacebookStrategy({
+    clientID: FACEBOOK_APP_ID,
+    clientSecret: FACEBOOK_APP_SECRET,
+    callbackURL: "http://zthunder.herokuapp.com/auth/facebook/callback",
+    profileFields: ['email', 'profileUrl']
+  },
+  function(accessToken, refreshToken, profile, done) {
+    process.nextTick(function () {
+      console.log("grabbed FB profile ", profile);
+      console.log("accessToken ", accessToken);
+      console.log("refreshToken", refreshToken);
+      // TODO - associate returned FB profile with user account
+      return done(null, profile);
+    });
+  }
+));
 
-// passport.serializeUser(function(user, done) {
-//   done(null, user);
-// });
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
 
-// passport.deserializeUser(function(obj, done) {
-//   done(null, obj);
-// });
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
 
 // // //
 // // //  GET Routes
 // // //
 
-// app.get('/auth/facebook', passport.authenticate('facebook'), function (req,res) {});
+app.get('/auth/facebook', passport.authenticate('facebook'), function (req,res) {});
 
-// app.get('/auth/facebook/callback',
-//   passport.authenticate('facebook', {failureRedirect: '/api/login'}),
-//   function (req, res) {
-//     res.redirect('/');
-//   }
-// );
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', {failureRedirect: '/api/login'}),
+  function (req, res) {
+    res.redirect('/');
+  }
+);
 
-// app.get('/auth/facebook', passport.authenticate('facebook'), function (req,res) {});
+app.get('/auth/facebook', passport.authenticate('facebook'), function (req,res) {});
 
-// app.get('/auth/facebook/callback',
-//   passport.authenticate('facebook', {failureRedirect: '/api/login'}),
-//   function (req, res) {
-//     console.log(req.body);
-//     res.redirect('/');
-//   }
-// );
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', {failureRedirect: '/api/login'}),
+  function (req, res) {
+    console.log(req.body);
+    res.redirect('/');
+  }
+);
 
 
 app.get('/api/users/:id', function (req, res, next) {
