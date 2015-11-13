@@ -13,7 +13,7 @@ var OrgPage = React.createClass({
 
   componentDidMount: function() {
     store.addChangeListener(this.onStoreChange);
-    // actions.loadOrg(this.props.params.orgName);
+    actions.fetchOrg(this.props.params.orgName);
   },
 
   componentWillUnmount: function(){
