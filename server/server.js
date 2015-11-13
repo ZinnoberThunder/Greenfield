@@ -67,25 +67,6 @@ passport.use(new LocalStrategy(
   }
 ));
 
-
-app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', {failureRedirect: '/api/login'}),
-  function (req, res) {
-    console.log('REQUEST ---- ' + req);
-    console.log('RESPONSE ---- ' + res);
-    res.redirect('/');
-  }
-);
-
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
-
-passport.deserializeUser(function(obj, done) {
-  done(null, obj);
-});
-
-
 passport.use(new FacebookStrategy({
     clientID: FACEBOOK_APP_ID,
     clientSecret: FACEBOOK_APP_SECRET,
@@ -111,9 +92,9 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
-// // //
-// // //  GET Routes
-// // //
+//
+//  GET Routes
+//
 
 app.get('/auth/facebook', passport.authenticate('facebook'), function (req,res) {});
 
@@ -123,17 +104,6 @@ app.get('/auth/facebook/callback',
     res.redirect('/');
   }
 );
-
-app.get('/auth/facebook', passport.authenticate('facebook'), function (req,res) {});
-
-app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', {failureRedirect: '/api/login'}),
-  function (req, res) {
-    console.log(req.body);
-    res.redirect('/');
-  }
-);
-
 
 app.get('/api/users/:id', function (req, res, next) {
   console.log('User ID: ' + req.params.id);
