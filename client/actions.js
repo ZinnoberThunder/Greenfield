@@ -41,9 +41,11 @@ var actions = {
       type: "POST",
       url: '/api/login',
       data: accInfo,
+
       success: function(response){
         actions.loadUser(response)
       },
+
     });
 
   },
@@ -52,6 +54,39 @@ var actions = {
     dispatcher.handleAction({
       actionType: 'LOAD_USER',
       data: user
+    });
+  },
+
+  fetchUser: function() {
+    $.ajax({
+      type: "GET",
+      url: '/api/user',
+      error: function(err) {
+        console.log(err);
+      },
+      success: function(res) {
+        actions.loadUser(res.user);
+      }
+    });
+  },
+
+  fetchOrg: function() {
+    $.ajax({
+      type: "GET",
+      url: '/api/org',
+      error: function(err) {
+        console.log(err);
+      },
+      success: function(res) {
+        actions.loadOrg(res.org);
+      }
+    });
+  },
+
+  loadOrg: function(org) {
+    dispatcher.handleAction({
+      actionType: 'LOAD_ORG',
+      data: org
     });
   }
 

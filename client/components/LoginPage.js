@@ -7,7 +7,7 @@ var LoginPage = React.createClass({
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
     var accInfo = {username: username, password: password};
-    console.log(accInfo)
+    console.log(accInfo);
     actions.loginUser(accInfo);
   },
 
