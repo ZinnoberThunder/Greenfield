@@ -8,42 +8,65 @@ var User = require('./../server/db/models/User');
 var Org = require('./../server/db/models/Org');
 var Account = require('./../server/db/models/Account');
 
-chai.use(chaiHttp);
+var request = require('supertest');
+var express = require('express');
+ 
+var app = express();
+
+
+// chai.use(chaiHttp);
 
 describe('HTTP', function() {
 
   var server = 'http://localhost:8000/';
 
-  describe('#get', function() {
-    it('should get /', function (done) {
-      chai.request(server)
+  describe('GET /', function(){
+    it('should get /', function(done){
+      request(server)
         .get('/')
-        .then(function (res) {
-          expect(res).to.have.status(200);
-        })
-        .catch(function (err) {
-          throw err;
-        })
-      done();
-    })
-  });
-
-  describe('#post', function() {
-    it('should login to /api/login', function (done) {
-      var agent = chai.request.agent(server)
-      agent
-        .post('/api/login')
-        .send({ username: 'testUser', password: 'testPass' })
-        .then(function (res) {
-          expect(res).to.have.cookie('sessionid');
-          // return agent.get('/')
-          //   .then(function (res) {
-          //      expect(res).to.have.status(200);
-          //   })
-        })
-      done();
+        .expect(200, done);
     })
   })
+
+  describe('POST /api/login', function(){
+    it('should login to auth/login', function(done){
+      request(server)
+        .post('auth/login')
+        .send({ username: 'testUser', password: 'testPass' })
+        .expect(200, done);
+    })
+  })
+
+  // describe('#get', function() {
+  //   it('should get /', function (done) {
+  //     chai.request(server)
+  //       .get('/')
+  //       .then(function (res) {
+  //         expect(res).to.have.status(200);
+  //       })
+  //       .catch(function (err) {
+  //         throw err;
+  //       })
+  //     done();
+  //   })
+  // });
+
+  // describe('#post', function() {
+  //   it('should login to /api/login', function (done) {
+  //     var agent = chai.request.agent(server)
+  //     agent
+  //       .post('/api/login')
+  //       .send({ username: 'testUser', password: 'testPass' })
+  //       .then(function (res) {
+  //         expect(res).to.have.cookie('sessionid');
+  //         // return agent.get('/')
+  //         //   .then(function (res) {
+  //         //      expect(res).to.have.status(200);
+  //         //   })
+  //       })
+  //     done();
+  //   })
+  // })
 
 })
 
@@ -115,6 +138,27 @@ describe('Org', function() {
         done();
       })
     })
+
+    it('should add a user to an org', function (done) {
+      Org.findOne({ name: data.name }, function (err, org) {
+        org.users.push('testUser');
+        org.save(function (err, org) {
+          expect(org.users.length).to.equal(1);
+          done();    
+        })
+      })
+    })
+
+    it('should add an admin to an org', function (done) {
+      Org.findOne({ name: data.name }, function (err, org) {
+        org.admins.push('testUser');
+        org.save(function (err, org) {
+          expect(org.admins.length).to.equal(1);
+          done();
+        })
+      })
+    })
+
   })
 
   describe('#find', function () {
@@ -187,6 +231,12 @@ describe('Account', function() {
 // var Account = require('./server/db/models/Account');
 // var udata = {username: 'testUser',password: 'testPass',email: 'ceverett@gmail.com'};
 
+// var request = require('supertest');
+// var express = require('express');
+ 
+// var app = express();
+
+// var server = 'http://localhost:8000/';
 
 
 
