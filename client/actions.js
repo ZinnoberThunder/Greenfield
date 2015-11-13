@@ -15,51 +15,35 @@ var actions = {
       // data is orgInfo from server
   },
 
-  signupUser: function(email, username, password) {
+  signupUser: function(accInfo) {
 
+    // Somewhat guessing on syntax, can't do much testing without db hooked up
     $.ajax({
       type: "POST",
-      url: '/api/login',
-      dataType: 'json',
-      data: {
-        email: email,
-        username: username,
-        password: password
-      },
-      error: function(err) {
-        // handle error:
-          // already user?
-          // username already taken?
-        console.log(err);
-      },
-      success: function(res){
-        actions.loadUser(res); // what will response look like?
-      },
+      url: '/api/signup',
+      data: accInfo,
+      success: function(response){
+        actions.loadUser(response)
+      }
     });
-
-    // actions.loadUser(accInfo);
   },
 
-  loginUser: function(username, password){
+  loginUser: function(accInfo){
     
-    if (auth.isLoggedIn()) {
-      // already logged in, handle this somehow?
-      // maybe with cb?
-      // cb(true);
-      return;
-    }
+    // if (auth.isLoggedIn()) {
+    //   // already logged in, handle this somehow?
+    //   // maybe with cb?
+    //   // cb(true);
+    //   return;
+    // }
 
     $.ajax({
       type: "POST",
       url: '/api/login',
-      dataType: 'json',
-      data: JSON.stringify(accInfo),
-      error: function(err) {
-        console.log(err);
+      data: accInfo,
+      success: function(response){
+        actions.loadUser(response)
       },
-      success: function(res){
-        actions.loadUser(res.user); // what will response look like?
-      }
     });
 
   },

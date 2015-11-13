@@ -111,9 +111,9 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
-// //
-// //  GET Routes
-// //
+// // //
+// // //  GET Routes
+// // //
 
 app.get('/auth/facebook', passport.authenticate('facebook'), function (req,res) {});
 
@@ -166,8 +166,7 @@ app.post('/api/signup', function (req, res, next) {
 });
 
 app.post('/api/login', passport.authenticate('local'), function (req, res){
-    console.log(passport);
-    res.redirect('/');
+    res.send(req.user);
   }
 );
 
