@@ -8,7 +8,7 @@ var UserPageHeader = React.createClass({
       <div>
         <h3>This is the User Page</h3>
         <div onClick={this.props.buttonClicked}> Click to change user</div>
-        <div>Current user is: {this.props ? this.props.user.name: 'no state'}</div>
+        <div>Current user is: {this.props ? this.props.user.username: 'no state'}</div>
       </div>
     )
   }
