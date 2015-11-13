@@ -8,11 +8,12 @@ var _store = {
   user: {
     name: 'kurt',
     accounts: ['facebook', 'linkedin'],
-    orgs: ['HR34'],
+    orgs: [{name: 'HR34', code: 'hr34'}],
   },
   organization: {
-    name: 'nick org',
-    members: [{name: 'nick', accounts: ['facebook', 'linkedin']}]
+    code: 'hr34',
+    name: 'HR34',
+    members: [{name: 'Kurt Weiberth', accounts: [{name: 'facebook', url: 'http://facebook.com/kurtweiberth'}]}]
   }
 };
 

@@ -44,14 +44,12 @@ gulp.task('watch:js', function() {
 
 gulp.task('serve', ['watch:js'], function() {
   return require('gulp-nodemon')({
-    exec: 'node-inspector & node --debug',
-    ext: 'js',
     script: './server/server.js',
-    ignore: ["gulpfile.js", "bundle.js", "node_modules/*", "app/components/*"]
+    ignore: ["gulpfile.js", "dist/bundle.js", "node_modules/*", "client/components/*"]
   });
 });
 
-gulp.task('build', ['build:js', 'css', 'font-awesome:fonts'], function() {
+gulp.task('build', ['build:js'], function() {
   return;
 });
 

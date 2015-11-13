@@ -13,12 +13,10 @@ var auth = {
   },
 
   isLoggedIn: function() {
-    console.log(auth.getToken());
     return !!auth.getToken();
   },
 
   requireAuth: function(nextState, replaceState) {
-    console.log(auth.isLoggedIn());
     if (!auth.isLoggedIn()) {
       replaceState({ nextPathname: nextState.location.pathname }, '/login');
     }
