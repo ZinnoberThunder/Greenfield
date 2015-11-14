@@ -14,6 +14,7 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var methodOverride = require('method-override');
 var Q = require('q');
+var jwt = require('jwt-simple');
 
 //
 //  Database vars
@@ -78,7 +79,7 @@ passport.use(new FacebookStrategy({
       console.log("grabbed FB profile ", profile);
       console.log("accessToken ", accessToken);
       console.log("refreshToken", refreshToken);
-      // TODO - associate returned FB profile with user account
+      Account.addAccount("username", "facebook", profile.profileUrl);
       return done(null, profile);
     });
   }
@@ -92,15 +93,21 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
+<<<<<<< HEAD
 //
 //  GET Routes
 //
+=======
+>>>>>>> added jwt
 
 app.get('/auth/facebook', passport.authenticate('facebook'), function (req,res) {});
 
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', {failureRedirect: '/api/login'}),
   function (req, res) {
+<<<<<<< HEAD
+=======
+>>>>>>> added jwt
     res.redirect('/');
   }
 );
@@ -142,7 +149,7 @@ app.post('/api/login', passport.authenticate('local'), function (req, res){
 
 app.post('/api/createOrg', function (req, res, next) {
   var orgName = req.body.name;
-  var orgCode = req.body.code;
+  var orgCode = req.body.name.toLowerCase().split(' ').join('-');
   console.log('New Org data: ' + req.body);
   Org.addOrg(orgName, orgCode, function (err, newOrg){
     res.send(newOrg);
