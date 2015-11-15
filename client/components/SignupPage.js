@@ -1,5 +1,6 @@
+var actions = require('../flux/actions');
 var React = require('react');
-var actions = require('../actions');
+
 var SignupPage = React.createClass({
 
   signupUser: function(event) {

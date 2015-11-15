@@ -1,5 +1,5 @@
-var React = require('react');
 var Link = require('react-router').Link;
+var React = require('react');
 
 var App = React.createClass({
 
@@ -14,6 +14,7 @@ var App = React.createClass({
       </div>
     );
   }
+  
 });
 
 module.exports = App;

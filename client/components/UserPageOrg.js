@@ -14,6 +14,7 @@ var UserPageOrg = React.createClass({
       </div>
     )
   }
+  
 });
 
 module.exports = UserPageOrg;

@@ -1,6 +1,6 @@
+var History = require('react-router').History;
 var React = require('react');
 var UserPageOrg = require('./UserPageOrg');
-var History = require('react-router').History;
 
 var UserPageOrgList = React.createClass({
 
@@ -14,7 +14,7 @@ var UserPageOrgList = React.createClass({
 
     return (
       <div>
-        <h4>Organizations!!!</h4>
+        <h4>Organizations</h4>
 
         {
 
@@ -30,6 +30,7 @@ var UserPageOrgList = React.createClass({
     );
 
   }
+  
 });
 
 module.exports = UserPageOrgList;

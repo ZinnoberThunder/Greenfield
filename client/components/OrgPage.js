@@ -1,7 +1,7 @@
-var React = require('react');
 var Link = require('react-router').Link;
-var store = require('../store');
 var OrgPageMemberList = require('./OrgPageMemberList');
+var React = require('react');
+var store = require('../flux/store');
 
 var OrgPage = React.createClass({
 

@@ -1,8 +1,8 @@
+var actions = require('../flux/actions');
 var React = require('react');
-var actions = require('../actions');
-var store = require('../store');
-var UserPageHeader = require('./UserPageHeader');
+var store = require('../flux/store');
 var UserPageAccountList = require('./UserPageAccountList');
+var UserPageHeader = require('./UserPageHeader');
 var UserPageOrgList = require('./UserPageOrgList');
 
 var UserPage = React.createClass({
