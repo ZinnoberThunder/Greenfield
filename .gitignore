@@ -19,4 +19,4 @@ bower_components/
 sandbox.js
 
 # Static files to be served
-dist
+dist/*.*
