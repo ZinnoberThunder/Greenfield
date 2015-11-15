@@ -80,7 +80,7 @@ gulp.task('watch:js', function() {
 // A simple gulp task to copy the index.html to the dist
 // folder upon each build
 gulp.task('copy:html', function() {
-    gulp.src('./index.html')
+    gulp.src('./client/index.html')
     .pipe(gulp.dest('./dist'));
 });
 
