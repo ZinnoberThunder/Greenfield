@@ -72,19 +72,33 @@ passport.use(new LocalStrategy(
   }
 ));
 
+//HACK
+var loggedInUser = null;
+
 passport.use(new FacebookStrategy({
+    passReqToCallback: true,
     clientID: FACEBOOK_APP_ID,
     clientSecret: FACEBOOK_APP_SECRET,
-    callbackURL: "http://zthunder.herokuapp.com/auth/facebook/callback",
-    profileFields: ['email', 'profileUrl']
+    callbackURL: "http://localhost:8000/auth/facebook/callback"/*"http://zthunder.herokuapp.com/auth/facebook/callback"*/,
+    profileFields: ['email', 'profileUrl', 'id', 'displayName', 'photos']
   },
-  function(accessToken, refreshToken, profile, done) {
+  function(req, accessToken, refreshToken, profile, done) {
     process.nextTick(function () {
       console.log("grabbed FB profile ", profile);
       console.log("accessToken ", accessToken);
-      console.log("refreshToken", refreshToken);
-      Account.addAccount("username", "facebook", profile.profileUrl);
-      return done(null, profile);
+      return User.findOne({username: loggedInUser.username})
+        .then(function (found){
+          var returned = {
+              name:'facebook',
+              url: profile.profileUrl,
+              imgLink: profile.picture.data.url
+            };
+          found.accounts.push(returned);
+          found.save( function (err, saved){
+            return done(null, returned);
+          });
+        });
+      //Account.addAccount("username", "facebook", profile.profileUrl);
     });
   }
 ));
@@ -106,6 +120,8 @@ app.get('/auth/facebook', passport.authenticate('facebook'), function (req,res) 
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', {failureRedirect: '/api/login'}),
   function (req, res) {
+    console.log("prof", req.body);
+    console.log("res prof", res.body);
     res.redirect('/');
   }
 );
@@ -116,6 +132,7 @@ app.get('/api/users', function (req, res, next) {
   User.findOne({username: user.username})
     .then(function (foundUser){
       if(foundUser){
+        loggedInUser = foundUser;
         res.send({user: foundUser});
       } else {
         res.send({error: "User not authorized"});
