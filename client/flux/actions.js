@@ -71,7 +71,6 @@ var actions = {
         console.log(err);
       },
       success: function(res) {
-        console.log(res);
         actions.loadOrg(res.org);
       }
     });
@@ -79,7 +78,7 @@ var actions = {
 
   loadOrg: function(org) {
     dispatcher.handleAction({
-      actionType: 'LOAD_ORG',
+      actionType: constants.LOAD_ORG,
       data: org
     });
   }
