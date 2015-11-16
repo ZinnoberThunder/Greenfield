@@ -14,6 +14,7 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var methodOverride = require('method-override');
 var Q = require('q');
+var jwt = require('jwt-simple');
 
 //
 //  Database vars
@@ -78,7 +79,7 @@ passport.use(new FacebookStrategy({
       console.log("grabbed FB profile ", profile);
       console.log("accessToken ", accessToken);
       console.log("refreshToken", refreshToken);
-      // TODO - associate returned FB profile with user account
+      Account.addAccount("username", "facebook", profile.profileUrl);
       return done(null, profile);
     });
   }
@@ -91,7 +92,6 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
-
 
 // // //
 // // //  GET Routes
@@ -115,8 +115,17 @@ app.get('/auth/facebook/callback',
   }
 );
 
-app.get('/api/users/:id', function (req, res, next) {
-  console.log('User ID: ' + req.params.id);
+app.get('/api/users', function (req, res, next) {
+  var token = req.body.token;
+  var user = jwt.decode(token, 'zinnober');
+  User.findOne({username: user.username})
+    .then(function (foundUser){
+      if(foundUser){
+        res.send({user: foundUser});
+      } else {
+        res.send({error: "User not authorized"});
+      }
+    });
 });
 
 app.get('/api/orgs/:id', function (req, res, next) {
@@ -139,20 +148,22 @@ app.post('/api/signup', function (req, res, next) {
   console.log(req.body);
   User.addUser(req.body.username, req.body.password, req.body.email, 
     function (err, newUser){
-      res.send(newUser);
+      var token = jwt.encode(newUser, 'zinnober');
+      res.send({user: newUser, token: token});
     }
   );
   // console.log(res);
 });
 
 app.post('/api/login', passport.authenticate('local'), function (req, res){
-    res.send(req.user);
+    var token = jwt.encode(req.user, 'zinnober');
+    res.send({user: req.user, token: token});
   }
 );
 
 app.post('/api/createOrg', function (req, res, next) {
   var orgName = req.body.name;
-  var orgCode = req.body.code;
+  var orgCode = req.body.name.toLowerCase().split(' ').join('-');
   console.log('New Org data: ' + req.body);
   Org.addOrg(orgName, orgCode, function (err, newOrg){
     res.send(newOrg);
