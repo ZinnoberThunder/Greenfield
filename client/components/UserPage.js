@@ -31,9 +31,7 @@ var UserPage = React.createClass({
     */
     store.addChangeListener(this.onStoreChange);
 
-    if (this.state.user.username !== '') {
-      actions.fetchUser();
-    }
+    actions.fetchUser();
   },
 
   componentWillUnmount: function(){

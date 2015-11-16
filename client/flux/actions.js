@@ -48,6 +48,7 @@ var actions = {
   fetchUser: function() {
 
     var token = auth.getToken();
+    console.log('calling fetch user')
 
     $.ajax({
       type: "GET",
@@ -59,6 +60,7 @@ var actions = {
         console.log(err);
       },
       success: function(res) {
+        console.log(res);
         actions.loadUser(res.user);
       }
     });
