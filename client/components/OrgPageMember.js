@@ -13,7 +13,7 @@ var OrgPageMember = React.createClass({
           this.props.accounts.map(function(account){
             return (
               <div>
-                <h2 key={account.url}>{account.name}: </h2><
+                <h2 key={account.url}>{account.name}: </h2>
                 <a href={account.url}>Go to link</a>
               </div>
             )

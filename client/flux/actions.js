@@ -1,3 +1,4 @@
+var auth = require('../auth/auth');
 var constants = require('./constants');
 var dispatcher = require('./dispatcher');
 var store = require('./store');
@@ -14,7 +15,8 @@ var actions = {
         console.log(err);
       },
       success: function(response){
-        actions.loadUser(response);
+        actions.loadUser(response.user);
+        auth.storeToken(response.token);
       }
     });
   },
@@ -26,7 +28,7 @@ var actions = {
       data: accInfo,
 
       success: function(response){
-        actions.loadUser(response)
+        actions.loadUser(response.user)
       }
     });
 
@@ -37,6 +39,8 @@ var actions = {
       actionType: constants.LOAD_USER,
       data: user
     });
+
+    // nav to homepage
   },
 
   fetchUser: function() {
