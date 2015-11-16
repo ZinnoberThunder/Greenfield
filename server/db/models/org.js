@@ -49,7 +49,7 @@ module.exports.addOrg = function (name, code, cb) {
     });
 };
 
-module.exports.addUserToOrg = function (username, orgName, isAdmin) {
+module.exports.addUserToOrg = function (user, orgName, isAdmin) {
 
   // Returning true;
 
@@ -58,9 +58,9 @@ module.exports.addUserToOrg = function (username, orgName, isAdmin) {
       throw err;
     } else {
       if (isAdmin) {
-        found.admins.push(username);
+        found.admins.push(user);
       } else {
-        found.users.push(username);
+        found.users.push(user);
       }
       found.save(function (error, result) {
         if (error) {
