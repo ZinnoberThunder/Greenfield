@@ -1,0 +1,39 @@
+body {
+  text-align: center;
+  background-color: #ABB7B7;
+}
+
+#logo {
+  max-height: 70px;
+  margin: 15px;
+  position: absolute;
+  left: 10px;
+}
+
+.nav {
+  margin: 20px;
+}
+
+.bar {
+  background-color: blue;
+  color: blue;
+}
+
+#profilePic {
+  border-radius: 100px;
+  max-height: 120px;
+  margin-top: 30px;
+}
+
+
+.account {
+  max-height: 80px;
+}
+
+.accounts {
+  margin: 40px;
+  border-radius: 20px;
+  border: 40px;
+  background-color: #ECECEC;
+  height: 150px;
+}

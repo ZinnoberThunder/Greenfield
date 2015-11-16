@@ -24,19 +24,10 @@ var actions = {
       type: "POST",
       url: '/api/login',
       data: accInfo,
-<<<<<<< HEAD:client/flux/actions.js
-      error: function(err) {
-        console.log(err);
-      },
-      success: function(response){
-        actions.loadUser(response);
-      },
 
-=======
       success: function(response){
         actions.loadUser(response)
       }
->>>>>>> Stupid git stuff:client/actions.js
     });
 
   },
