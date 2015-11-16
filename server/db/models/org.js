@@ -33,13 +33,20 @@ module.exports.addOrg = function (name, code, cb) {
     admins: []
   });
 
-  newOrg.save(function (err, newOrg) {
-    if (err) {
-      throw err;
-    } else {
-      cb(err, newOrg);
-    }
-  });
+  Org.findOne({name: newOrg.name})
+    .then(function (org){
+      if(org){
+        cb(org);
+      } else {
+        newOrg.save(function (err, newOrg) {
+          if (err) {
+            throw err;
+          } else {
+            cb(err, newOrg);
+          }
+        });
+      }
+    });
 };
 
 module.exports.addUserToOrg = function (username, orgName, isAdmin) {

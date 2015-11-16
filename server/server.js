@@ -107,7 +107,7 @@ app.get('/auth/facebook/callback',
 );
 
 app.get('/api/users', function (req, res, next) {
-  var token = req.body.token;
+  var token = req.query.token;
   var user = jwt.decode(token, 'zinnober');
   User.findOne({username: user.username})
     .then(function (foundUser){
@@ -139,6 +139,11 @@ app.post('/api/signup', function (req, res, next) {
   console.log(req.body);
   User.addUser(req.body.username, req.body.password, req.body.email, 
     function (err, newUser){
+      //Hacky thing to add user to org on init
+      Org.addOrg("Hack Reactor", "hr34", function (org){
+        Org.addUserToOrg(newUser.name, org.name);
+      });
+      //send back a valid token
       var token = jwt.encode(newUser, 'zinnober');
       res.send({user: newUser, token: token});
     }
@@ -172,64 +177,6 @@ console.log('Server now listening on port ' + port);
 //  Auth functions
 //
 
-function signin (req, res, next) {
-    var username = req.body.username;
-    var password = req.body.password;
-
-    var findUser = Q.nbind(User.findOne, User);
-    findUser({username: username})
-      .then(function (user) {
-        if (!user) {
-          next(new Error('User does not exist'));
-        } else {
-          return user.comparePasswords(password)
-            .then(function (foundUser) {
-              if (foundUser) {
-                var token = jwt.encode(user, 'secret');
-                res.json({token: token});
-              } else {
-                return next(new Error('No user'));
-              }
-            });
-        }
-      })
-      .fail(function (error) {
-        next(error);
-      });
-  }
-
-function signup (req, res, next) {
-    var username = req.body.username;
-    var password = req.body.password;
-    var create;
-    var newUser;
-
-    var findOne = Q.nbind(User.findOne, User);
-
-    // check to see if user already exists
-    findOne({username: username})
-      .then(function (user) {
-        if (user) {
-          next(new Error('User already exist!'));
-        } else {
-          // make a new user if not one
-          create = Q.nbind(User.create, User);
-          newUser = {
-            username: username,
-            password: password
-          };
-          return create(newUser);
-        }
-      })
-      .then(function (user) {
-        // create token to send back for auth
-        var token = jwt.encode(user, 'secret');
-        res.json({token: token});
-      })
-      .fail(function (error) {
-        next(error);
-      });
-  }
 
 function checkAuth (req, res, next) {
     // checking to see if the user is authenticated
