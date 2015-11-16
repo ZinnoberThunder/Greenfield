@@ -115,8 +115,17 @@ app.get('/auth/facebook/callback',
   }
 );
 
-app.get('/api/users/:id', function (req, res, next) {
-  console.log('User ID: ' + req.params.id);
+app.get('/api/users', function (req, res, next) {
+  var token = req.body.token;
+  var user = jwt.decode(token, 'zinnober');
+  User.findOne({username: user.username})
+    .then(function (foundUser){
+      if(foundUser){
+        res.send({user: foundUser});
+      } else {
+        res.send({error: "User not authorized"});
+      }
+    });
 });
 
 app.get('/api/orgs/:id', function (req, res, next) {
@@ -139,14 +148,16 @@ app.post('/api/signup', function (req, res, next) {
   console.log(req.body);
   User.addUser(req.body.username, req.body.password, req.body.email, 
     function (err, newUser){
-      res.send(newUser);
+      var token = jwt.encode(newUser, 'zinnober');
+      res.send({user: newUser, token: token});
     }
   );
   // console.log(res);
 });
 
 app.post('/api/login', passport.authenticate('local'), function (req, res){
-    res.send(req.user);
+    var token = jwt.encode(req.user, 'zinnober');
+    res.send({user: req.user, token: token});
   }
 );
 
