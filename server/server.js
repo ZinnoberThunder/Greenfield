@@ -93,18 +93,9 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
-// // //
-// // //  GET Routes
-// // //
-
-app.get('/auth/facebook', passport.authenticate('facebook'), function (req,res) {});
-
-app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', {failureRedirect: '/api/login'}),
-  function (req, res) {
-    res.redirect('/');
-  }
-);
+//
+// GET Routes
+//
 
 app.get('/auth/facebook', passport.authenticate('facebook'), function (req,res) {});
 
@@ -264,9 +255,3 @@ function checkAuth (req, res, next) {
         });
     }
   }
-
-//
-//  Testing data
-//
-
-// User.addUser('Alex', 'hello', 'alexmclean206@berkeley.edu');
