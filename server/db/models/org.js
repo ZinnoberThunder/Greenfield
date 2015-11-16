@@ -34,7 +34,7 @@ module.exports.addOrg = function (name, code, cb) {
   });
 
   Org.findOne({name: newOrg.name})
-    .then(function (org){
+    .exec(function (err, org){
       if(org){
         cb(org);
       } else {
@@ -42,14 +42,14 @@ module.exports.addOrg = function (name, code, cb) {
           if (err) {
             throw err;
           } else {
-            cb(err, newOrg);
+            cb(newOrg);
           }
         });
       }
     });
 };
 
-module.exports.addUserToOrg = function (username, orgName, isAdmin) {
+module.exports.addUserToOrg = function (user, orgName, isAdmin) {
 
   // Returning true;
 
@@ -58,9 +58,9 @@ module.exports.addUserToOrg = function (username, orgName, isAdmin) {
       throw err;
     } else {
       if (isAdmin) {
-        found.admins.push(username);
+        found.admins.push(user);
       } else {
-        found.users.push(username);
+        found.users.push(user);
       }
       found.save(function (error, result) {
         if (error) {

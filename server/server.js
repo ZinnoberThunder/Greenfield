@@ -152,7 +152,7 @@ app.post('/api/signup', function (req, res, next) {
     function (err, newUser){
       //Hacky thing to add user to org on init
       Org.addOrg("Hack Reactor", "hr34", function (org){
-        Org.addUserToOrg(newUser.name, org.name);
+        Org.addUserToOrg(newUser, org.name);
       });
       //send back a valid token
       var token = jwt.encode(newUser, 'zinnober');
