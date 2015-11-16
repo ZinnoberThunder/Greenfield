@@ -1,3 +1,4 @@
+var auth = require('../auth/auth');
 var constants = require('./constants');
 var dispatcher = require('./dispatcher');
 var store = require('./store');
@@ -15,7 +16,7 @@ var actions = {
       },
       success: function(response){
         actions.loadUser(response.user);
-        // auth.storeToken(response.token);
+        auth.storeToken(response.token);
       }
     });
   },
@@ -38,6 +39,8 @@ var actions = {
       actionType: constants.LOAD_USER,
       data: user
     });
+
+    // nav to homepage
   },
 
   fetchUser: function() {
