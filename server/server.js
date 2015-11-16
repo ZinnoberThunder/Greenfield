@@ -119,8 +119,16 @@ app.get('/api/users', function (req, res, next) {
     });
 });
 
-app.get('/api/orgs/:id', function (req, res, next) {
-  console.log('Org ID: ' + req.params.id);
+app.get('/api/orgs/:code', function (req, res, next) {
+  var code = req.params.code;
+  Org.findOne({code: code})
+    .then(function (foundOrg){
+      if(foundOrg){
+        res.send({org: foundOrg});
+      } else {
+        res.send({error: "Organization not found"});
+      }
+    });
 });
 
 app.get('*', function (request, response){
@@ -136,7 +144,6 @@ app.get('*', function (request, response){
 //
 
 app.post('/api/signup', function (req, res, next) {
-  console.log(req.body);
   User.addUser(req.body.username, req.body.password, req.body.email, 
     function (err, newUser){
       //Hacky thing to add user to org on init
@@ -160,7 +167,6 @@ app.post('/api/login', passport.authenticate('local'), function (req, res){
 app.post('/api/createOrg', function (req, res, next) {
   var orgName = req.body.name;
   var orgCode = req.body.name.toLowerCase().split(' ').join('-');
-  console.log('New Org data: ' + req.body);
   Org.addOrg(orgName, orgCode, function (err, newOrg){
     res.send(newOrg);
   });
