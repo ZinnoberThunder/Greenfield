@@ -77,7 +77,7 @@ module.exports.addUser = function (username, password, email, cb) {
     username: username,
     password: password,
     email: email,
-    orgs: [],
+    orgs: [{name:'Hack Reactor 34', code: 'hr34'}],
     accounts: []
   });
 
