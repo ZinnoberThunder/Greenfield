@@ -24,13 +24,10 @@ var actions = {
       type: "POST",
       url: '/api/login',
       data: accInfo,
-      error: function(err) {
-        console.log(err);
-      },
-      success: function(response){
-        actions.loadUser(response);
-      },
 
+      success: function(response){
+        actions.loadUser(response)
+      }
     });
 
   },

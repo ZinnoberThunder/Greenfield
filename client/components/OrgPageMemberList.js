@@ -6,8 +6,7 @@ var OrgPageMemberList = React.createClass({
   render: function() {
 
     return (
-      <div>
-        <h4>Members</h4>
+      <div className="accounts">
         
         {
 

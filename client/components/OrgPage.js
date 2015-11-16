@@ -37,9 +37,12 @@ var OrgPage = React.createClass({
 
   render: function() {
 
+
     return (
       <div>
-        <h3>This is the OrgPage for {this.state.organization.name}</h3>
+        <img id="profilePic" src="/assets/hr.png"></img>
+        <h2>Welcome to {this.state.organization.name}</h2>
+        <h2>Members</h2>
         <OrgPageMemberList organization={this.state.organization} />
       </div>
     )

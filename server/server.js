@@ -92,9 +92,19 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
-//
-//  GET Routes
-//
+
+// // //
+// // //  GET Routes
+// // //
+
+app.get('/auth/facebook', passport.authenticate('facebook'), function (req,res) {});
+
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', {failureRedirect: '/api/login'}),
+  function (req, res) {
+    res.redirect('/');
+  }
+);
 
 app.get('/auth/facebook', passport.authenticate('facebook'), function (req,res) {});
 

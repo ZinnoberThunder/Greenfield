@@ -29,14 +29,16 @@ var UserPageOrgList = React.createClass({
     evaluated as plain-old Javascript
     */
     return (
-      <div>
-        <h4>Organizations</h4>
+
+      <div className="accounts">
+        <h2>Organizations</h2>
+        <img navToOrg={this.navToOrg} className="account" src="assets/hr.png"></img>
 
         {
 
           this.props.orgs.map(function(org){
             return (
-              <UserPageOrg navToOrg={this.navToOrg} key={org.code} name={org.name} code={org.code} />
+              <UserPageOrg img="assets/hr.png" navToOrg={this.navToOrg} key={org.code} name={org.name} code={org.code} />
             )
           }.bind(this))
 

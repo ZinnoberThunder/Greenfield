@@ -15,8 +15,8 @@ var App = React.createClass({
     */
     return (
       <div>
-        <Link to="/">Click to go to UserPage</Link><br/>
-        <Link to="/org/hr34">Click to go to OrgPage</Link><br/>
+        <button><Link to="/">Click to go to UserPage</Link></button>
+        <button><Link to="/org/hr34">Click to go to OrgPage</Link><br/></button>
         {this.props.children}
       </div>
     );
