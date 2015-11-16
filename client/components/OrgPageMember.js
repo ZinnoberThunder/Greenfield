@@ -12,9 +12,10 @@ var OrgPageMember = React.createClass({
         {
 
           this.props.accounts.map(function(account){
+            console.log(account);
             return (
               <div class="account">
-                <h3 key={account.url}>{account.name}</h3>
+                <h3 key={account.accounts.url}>{account.name}</h3>
                 <a href={account.url}><img className="orgAccount" src="/assets/facebook.png"></img></a>
               </div>
             )
