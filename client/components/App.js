@@ -24,8 +24,6 @@ var App = React.createClass({
     */
     return (
       <div>
-        <button><Link to="/">Click to go to UserPage</Link></button>
-        <button><Link to="/org/hr34">Click to go to OrgPage</Link><br/></button>
         <button onClick={this.logout}>Logout</button>
         {this.props.children}
       </div>

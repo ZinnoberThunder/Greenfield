@@ -84,10 +84,24 @@ gulp.task('copy:html', function() {
     .pipe(gulp.dest('./dist'));
 });
 
+// A simple gulp task to copy the css styles folder to the 
+// dist folder upon each build
+gulp.task('copy:css', function() {
+    gulp.src('./styles/*.css')
+    .pipe(gulp.dest('./dist/styles'));
+});
+
+// A simple gulp task to copy the assets (PNGs) to the 
+// dist folder upon each build
+gulp.task('copy:assets', function() {
+    gulp.src('./assets/*.png')
+    .pipe(gulp.dest('./dist/assets'));
+});
+
 // Use 'gulp serve' to run the watch:js task (which will
 // build and watchify the app), and then start a nodemon 
 // server that runs our server file
-gulp.task('serve', ['watch:js', 'copy:html'], function() {
+gulp.task('serve', ['watch:js', 'copy:css', 'copy:assets', 'copy:html'], function() {
   return require('gulp-nodemon')({
     script: './server/server.js',
     ignore: ["gulpfile.js", "dist/bundle.js", "node_modules/*", "client/components/*"]
@@ -96,7 +110,7 @@ gulp.task('serve', ['watch:js', 'copy:html'], function() {
 
 // Is run upon deployment on Heroku with the npm start 
 // script in package.json 
-gulp.task('build', ['build:js', 'copy:html'], function() {
+gulp.task('build', ['build:js', 'copy:css', 'copy:assets', 'copy:html'], function() {
   return;
 });
 

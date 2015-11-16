@@ -1,0 +1,90 @@
+body {
+  text-align: center;
+  background-image: url("../assets/triangular.png");
+}
+
+#logo {
+  max-height: 70px;
+  margin: 40px;
+  position: absolute;
+  left: 10px;
+}
+
+.nav {
+  margin: 20px;
+}
+
+.bar {
+  background-color: blue;
+  color: blue;
+}
+
+#profilePic {
+  border-radius: 100px;
+  max-height: 120px;
+  margin-top: 30px;
+}
+
+.username {
+  float: left;
+  margin-top: 60px;
+  margin-left: 20px;
+}
+
+#form {
+  height: 350px;
+  margin-left: 400px;
+  margin-top: 150px;
+  margin-right: 400px;
+  border-radius: 50px;
+  background-color: #808080;
+}
+
+.account {
+  max-height: 80px;
+}
+
+h1 {
+  color: white;
+}
+
+h2 {
+  color: white;
+}
+
+h3 {
+  color: white;
+}
+
+h4 {
+  color: white;
+}
+
+.orgAccount {
+  max-height: 100px;
+}
+
+.accounts {
+  margin: 40px;
+  border-radius: 20px;
+  border: 40px;
+  background-color: #808080;
+  height: 150px;
+}
+
+a:hover {
+  cursor: pointer;
+  color: white;
+}
+
+a:link {
+  color: black;
+}
+
+
+.profPic {
+  border-radius: 100px;
+  max-height: 120px;
+  margin: 15px;
+  float: left;
+}
