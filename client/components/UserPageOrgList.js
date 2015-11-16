@@ -32,8 +32,6 @@ var UserPageOrgList = React.createClass({
 
       <div className="accounts">
         <h2>Organizations</h2>
-        <img navToOrg={this.navToOrg} className="account" src="assets/hr.png"></img>
-
         {
 
           this.props.orgs.map(function(org){
