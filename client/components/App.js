@@ -24,7 +24,7 @@ var App = React.createClass({
     */
     return (
       <div>
-        <button onClick={this.logout}>Logout</button>
+        <button id="logout" onClick={this.logout}>Logout</button>
         {this.props.children}
       </div>
     );

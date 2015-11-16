@@ -21,7 +21,7 @@ var UserPageAccountList = React.createClass({
       <div className="accounts">
       <h2 className="accountTitle">Accounts</h2>
             {
-              this.props.accounts.length === 0 && <a><h2 id="fbLogin">Log in with Facebook</h2></a>
+              this.props.accounts.length === 0 && <a href="/auth/facebook"><h2 className="fbLogin">Log in with<br/>Facebook</h2></a>
             }
             {
               this.props.accounts.map(function(account){
