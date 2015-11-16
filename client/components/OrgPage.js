@@ -13,7 +13,16 @@ var OrgPage = React.createClass({
 
   componentDidMount: function() {
     store.addChangeListener(this.onStoreChange);
-    actions.fetchOrg(this.props.params.orgName);
+
+    /*
+    Because we set up the path ont he Route component
+    to be 'org/:orgName', the router will pass down the 
+    orgName param as a prop to this compnent when it 
+    mounts and renders. We can use this param to then
+    fetch the correct org info from the server by calling
+    the fetchOrg action.
+    */
+    //actions.fetchOrg(this.props.params.orgName);
   },
 
   componentWillUnmount: function(){
