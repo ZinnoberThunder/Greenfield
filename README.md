@@ -29,13 +29,13 @@ And of course ZThunder itself is open source with a [public repository][repo] on
 ```sh
 $ npm install -g gulp
 ```
-4. Switch to ZinnoberThunder directory and install dependencies:
+Switch to ZinnoberThunder directory and install dependencies:
 ```sh
 $ cd ZinnoberThunder
 $ npm install
 $ gulp build
 ```
-5. Start the server:
+Start the server:
 ```
 $ npm start
 ```

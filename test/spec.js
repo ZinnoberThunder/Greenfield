@@ -11,7 +11,7 @@ var Account = require('./../server/db/models/Account');
 var request = require('supertest');
 var express = require('express');
  
-var app = express();
+var app = express({});
 
 
 // chai.use(chaiHttp);
@@ -36,38 +36,6 @@ describe('HTTP', function() {
         .expect(200, done);
     })
   })
-
-  // describe('#get', function() {
-  //   it('should get /', function (done) {
-  //     chai.request(server)
-  //       .get('/')
-  //       .then(function (res) {
-  //         expect(res).to.have.status(200);
-  //       })
-  //       .catch(function (err) {
-  //         throw err;
-  //       })
-  //     done();
-  //   })
-  // });
-
-  // describe('#post', function() {
-  //   it('should login to /api/login', function (done) {
-  //     var agent = chai.request.agent(server)
-  //     agent
-  //       .post('/api/login')
-  //       .send({ username: 'testUser', password: 'testPass' })
-  //       .then(function (res) {
-  //         expect(res).to.have.cookie('sessionid');
-  //         // return agent.get('/')
-  //         //   .then(function (res) {
-  //         //      expect(res).to.have.status(200);
-  //         //   })
-  //       })
-  //     done();
-  //   })
-  // })
-
 })
 
 describe('User', function() {
