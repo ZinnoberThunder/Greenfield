@@ -6,19 +6,13 @@ var OrgPageMemberList = React.createClass({
   render: function() {
 
     return (
-      <div className="accounts">
-        
-        {
-
-          this.props.organization.users.map(function(user){
-            return (
-              <OrgPageMember key={user.username} name={user.username} accounts={user.accounts} />
-            )
-          })
-
-        }
-
-      </div>
+      this.props.organization.members.map(function(member){
+        return (
+          <div className="accounts">
+            <OrgPageMember key={member.name} name={member.name} accounts={member.accounts} />
+          </div>
+        )
+      })
     );
   }
 
