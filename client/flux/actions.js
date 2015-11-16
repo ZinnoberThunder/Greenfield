@@ -15,7 +15,6 @@ var actions = {
         console.log(err);
       },
       success: function(response){
-        actions.loadUser(response.user);
         auth.storeToken(response.token);
         caller.history.pushState(null, '/');
       }
@@ -48,7 +47,6 @@ var actions = {
   fetchUser: function() {
 
     var token = auth.getToken();
-    console.log('calling fetch user')
 
     $.ajax({
       type: "GET",
@@ -60,16 +58,15 @@ var actions = {
         console.log(err);
       },
       success: function(res) {
-        console.log(res);
         actions.loadUser(res.user);
       }
     });
   },
 
-  fetchOrg: function() {
+  fetchOrg: function(orgName) {
     $.ajax({
       type: "GET",
-      url: '/api/org',
+      url: '/api/orgs/' + orgName,
       error: function(err) {
         console.log(err);
       },
@@ -81,7 +78,7 @@ var actions = {
 
   loadOrg: function(org) {
     dispatcher.handleAction({
-      actionType: 'LOAD_ORG',
+      actionType: constants.LOAD_ORG,
       data: org
     });
   }
