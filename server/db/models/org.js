@@ -34,7 +34,7 @@ module.exports.addOrg = function (name, code, cb) {
   });
 
   Org.findOne({name: newOrg.name})
-    .then(function (org){
+    .exec(function (err, org){
       if(org){
         cb(org);
       } else {
@@ -42,7 +42,7 @@ module.exports.addOrg = function (name, code, cb) {
           if (err) {
             throw err;
           } else {
-            cb(err, newOrg);
+            cb(newOrg);
           }
         });
       }
