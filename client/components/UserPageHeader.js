@@ -7,7 +7,7 @@ var UserPageHeader = React.createClass({
     return (
       <div>
         <img id="profilePic" src="/assets/profilepic.png"></img>
-        <h1>{this.props ? this.props.user.name: 'no user in state'}</h1>
+        <h1>{this.props ? this.props.user.username: 'no user in state'}</h1>
         <h3>Your Profile</h3>
       </div>
     )

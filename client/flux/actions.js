@@ -6,7 +6,7 @@ var $ = require('jquery');
 
 var actions = {
 
-  signupUser: function(accInfo) {
+  signupUser: function(accInfo, caller) {
     $.ajax({
       type: "POST",
       url: '/api/signup',
@@ -17,18 +17,22 @@ var actions = {
       success: function(response){
         actions.loadUser(response.user);
         auth.storeToken(response.token);
+        caller.history.pushState(null, '/');
       }
     });
   },
 
-  loginUser: function(accInfo){
+  loginUser: function(accInfo, caller){
     $.ajax({
       type: "POST",
       url: '/api/login',
       data: accInfo,
-
+      error: function(err) {
+        console.log(err);
+      },
       success: function(response){
-        actions.loadUser(response.user)
+        auth.storeToken(response.token);
+        caller.history.pushState(null, '/');
       }
     });
 
@@ -39,18 +43,24 @@ var actions = {
       actionType: constants.LOAD_USER,
       data: user
     });
-
-    // nav to homepage
   },
 
   fetchUser: function() {
+
+    var token = auth.getToken();
+    console.log('calling fetch user')
+
     $.ajax({
       type: "GET",
-      url: '/api/user',
+      url: '/api/users',
+      data: {
+        token: token
+      },
       error: function(err) {
         console.log(err);
       },
       success: function(res) {
+        console.log(res);
         actions.loadUser(res.user);
       }
     });

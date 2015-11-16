@@ -30,6 +30,8 @@ var UserPage = React.createClass({
     the store emits it's CHANGE_EVENT (see store)
     */
     store.addChangeListener(this.onStoreChange);
+
+    actions.fetchUser();
   },
 
   componentWillUnmount: function(){

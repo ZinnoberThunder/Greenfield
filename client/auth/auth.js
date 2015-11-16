@@ -9,7 +9,7 @@ var auth = {
   },
 
   removeToken: function() {
-    localStorage.removeItem();
+    localStorage.removeItem('token');
   },
 
   isLoggedIn: function() {

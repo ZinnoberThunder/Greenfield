@@ -1,7 +1,16 @@
+var auth = require('../auth/auth');
+var History = require('react-router').History;
 var Link = require('react-router').Link;
 var React = require('react');
 
 var App = React.createClass({
+
+  mixins: [History],
+
+  logout: function() {
+    auth.removeToken();
+    this.history.pushState(null, '/login');
+  },
 
   render: function() {
 
@@ -17,6 +26,7 @@ var App = React.createClass({
       <div>
         <button><Link to="/">Click to go to UserPage</Link></button>
         <button><Link to="/org/hr34">Click to go to OrgPage</Link><br/></button>
+        <button onClick={this.logout}>Logout</button>
         {this.props.children}
       </div>
     );
