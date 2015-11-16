@@ -71,6 +71,7 @@ var actions = {
         console.log(err);
       },
       success: function(res) {
+        console.log(res);
         actions.loadOrg(res.org);
       }
     });

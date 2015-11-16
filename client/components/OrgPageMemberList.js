@@ -12,7 +12,7 @@ var OrgPageMemberList = React.createClass({
 
           this.props.organization.users.map(function(user){
             return (
-              <OrgPageMember key={user.name} name={user.name} accounts={user.accounts} />
+              <OrgPageMember key={user.username} name={user.username} accounts={user.accounts} />
             )
           })
 
