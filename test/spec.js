@@ -13,9 +13,6 @@ var express = require('express');
  
 var app = express({});
 
-
-// chai.use(chaiHttp);
-
 describe('HTTP', function() {
 
   var server = 'http://localhost:8000/';
