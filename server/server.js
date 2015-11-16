@@ -44,7 +44,11 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 app.use(methodOverride());
-app.use(session({secret: 'zthunder'}));
+app.use(session({
+  saveUninitialized: false,
+  resave: false,
+  secret: 'zthunder'
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static('./dist'));
