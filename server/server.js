@@ -93,21 +93,24 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
-<<<<<<< HEAD
-//
-//  GET Routes
-//
-=======
->>>>>>> added jwt
+// // //
+// // //  GET Routes
+// // //
 
 app.get('/auth/facebook', passport.authenticate('facebook'), function (req,res) {});
 
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', {failureRedirect: '/api/login'}),
   function (req, res) {
-<<<<<<< HEAD
-=======
->>>>>>> added jwt
+    res.redirect('/');
+  }
+);
+
+app.get('/auth/facebook', passport.authenticate('facebook'), function (req,res) {});
+
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', {failureRedirect: '/api/login'}),
+  function (req, res) {
     res.redirect('/');
   }
 );

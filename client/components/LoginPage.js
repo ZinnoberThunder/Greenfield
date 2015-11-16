@@ -1,13 +1,14 @@
+var actions = require('../flux/actions');
 var React = require('react');
-var actions = require('../actions');
-var LoginPage = React.createClass({
 
+var LoginPage = React.createClass({
+  
   loginUser: function(event) {
     event.preventDefault();
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
     var accInfo = {username: username, password: password};
-    console.log(accInfo);
+
     actions.loginUser(accInfo);
   },
 

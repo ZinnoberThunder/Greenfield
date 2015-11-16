@@ -18,6 +18,5 @@ bower_components/
 # sandbox
 sandbox.js
 
-# Testing Waffle.io
-
-dist/bundle.js
+# Static files to be served
+dist/*.*

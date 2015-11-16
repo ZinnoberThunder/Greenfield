@@ -6,11 +6,13 @@ var UserPageHeader = React.createClass({
 
     return (
       <div>
-        <h1>This is the User Page</h1>
-        <div>Current user is: {this.props ? this.props.user.name: 'no user in state'}</div>
+        <img id="profilePic" src="/assets/profilepic.png"></img>
+        <h1>{this.props ? this.props.user.name: 'no user in state'}</h1>
+        <h3>Your Profile</h3>
       </div>
     )
   }
+  
 });
 
 module.exports = UserPageHeader;
