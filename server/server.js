@@ -88,13 +88,15 @@ passport.use(new FacebookStrategy({
       console.log("accessToken ", accessToken);
       return User.findOne({username: loggedInUser.username})
         .then(function (found){
+          console.log("found ", found);
           var returned = {
               name:'facebook',
               url: profile.profileUrl,
-              imgLink: profile.picture.data.url
+              imgLink: profile.photos[0].value
             };
           found.accounts.push(returned);
           found.save( function (err, saved){
+            console.log("return ", returned);
             return done(null, returned);
           });
         });
