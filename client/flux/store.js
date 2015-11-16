@@ -22,9 +22,12 @@ var _store = {
     orgs: [],
   },
   organization: {
-    code: 'hr34',
-    name: 'HR34',
-    members: [{name: 'Kurt Weiberth', accounts: [{name: 'facebook', url: 'http://facebook.com/kurtweiberth'}]}]
+    // code: 'hr34',
+    // name: 'HR34',
+    // members: [{name: 'Kurt Weiberth', accounts: [{name: 'facebook', url: 'http://facebook.com/kurtweiberth'}]}]
+    code: '',
+    name: '',
+    members: []
   }
 };
 

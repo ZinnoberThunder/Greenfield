@@ -1,3 +1,4 @@
+var actions = require('../flux/actions');
 var Link = require('react-router').Link;
 var OrgPageMemberList = require('./OrgPageMemberList');
 var React = require('react');
@@ -15,14 +16,14 @@ var OrgPage = React.createClass({
     store.addChangeListener(this.onStoreChange);
 
     /*
-    Because we set up the path ont he Route component
+    Because we set up the path on the Route component
     to be 'org/:orgName', the router will pass down the 
     orgName param as a prop to this compnent when it 
     mounts and renders. We can use this param to then
     fetch the correct org info from the server by calling
     the fetchOrg action.
     */
-    //actions.fetchOrg(this.props.params.orgName);
+    actions.fetchOrg(this.props.params.orgName);
   },
 
   componentWillUnmount: function(){
