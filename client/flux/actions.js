@@ -14,7 +14,8 @@ var actions = {
         console.log(err);
       },
       success: function(response){
-        actions.loadUser(response);
+        actions.loadUser(response.user);
+        // auth.storeToken(response.token);
       }
     });
   },
@@ -26,7 +27,7 @@ var actions = {
       data: accInfo,
 
       success: function(response){
-        actions.loadUser(response)
+        actions.loadUser(response.user)
       }
     });
 
