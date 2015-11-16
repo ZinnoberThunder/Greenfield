@@ -18,7 +18,7 @@ var OrgPage = React.createClass({
     /*
     Because we set up the path on the Route component
     to be 'org/:orgName', the router will pass down the 
-    orgName param as a prop to this compnent when it 
+    orgName param as a prop to this component when it 
     mounts and renders. We can use this param to then
     fetch the correct org info from the server by calling
     the fetchOrg action.

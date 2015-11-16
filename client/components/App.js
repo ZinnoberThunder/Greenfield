@@ -7,6 +7,10 @@ var App = React.createClass({
 
   mixins: [History],
 
+  /*
+  On logout, remove the token from local storage and redirect the
+  user to the /login page
+  */
   logout: function() {
     auth.removeToken();
     this.history.pushState(null, '/login');
