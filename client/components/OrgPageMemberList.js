@@ -1,5 +1,5 @@
-var React = require('react');
 var OrgPageMember = require('./OrgPageMember');
+var React = require('react');
 
 var OrgPageMemberList = React.createClass({
 

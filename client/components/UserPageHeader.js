@@ -11,6 +11,7 @@ var UserPageHeader = React.createClass({
       </div>
     )
   }
+  
 });
 
 module.exports = UserPageHeader;

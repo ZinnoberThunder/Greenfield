@@ -1,4 +1,5 @@
 var React = require('react');
+
 var OrgPageMember = React.createClass({
 
   render: function() {
@@ -23,6 +24,7 @@ var OrgPageMember = React.createClass({
       </div>
     )
   }
+  
 });
 
 module.exports = OrgPageMember;

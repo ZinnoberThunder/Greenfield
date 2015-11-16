@@ -1,4 +1,5 @@
 var React = require('react');
+
 var UserPageAccount = React.createClass({
 
   render: function() {
@@ -9,6 +10,7 @@ var UserPageAccount = React.createClass({
       </div>
     )
   }
+  
 });
 
 module.exports = UserPageAccount;
