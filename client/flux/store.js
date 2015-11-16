@@ -1,4 +1,5 @@
 var assign = require('object-assign');
+var constants = require('./constants');
 var dispatcher = require('./dispatcher');
 var EventEmitter = require('events').EventEmitter;
 
@@ -27,7 +28,7 @@ var _store = {
     // members: [{name: 'Kurt Weiberth', accounts: [{name: 'facebook', url: 'http://facebook.com/kurtweiberth'}]}]
     code: '',
     name: '',
-    members: []
+    users: []
   }
 };
 
@@ -38,6 +39,10 @@ data coming through on the payload of the action
 */
 var loadUser = function(data){
   _store.user = data;
+};
+
+var loadOrg = function(data){
+  _store.organization = data;
 };
 
 /* 
@@ -81,8 +86,12 @@ to notify the components of the change.
 dispatcher.register(function(payload){
   var action = payload.action;
   switch(action.actionType){
-    case 'LOAD_USER':
+    case constants.LOAD_USER:
       loadUser(action.data);
+      store.emit(CHANGE_EVENT);
+      break;
+    case constants.LOAD_ORG:
+      loadOrg(action.data);
       store.emit(CHANGE_EVENT);
       break;
     default:
