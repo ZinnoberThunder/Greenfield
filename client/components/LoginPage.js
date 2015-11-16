@@ -1,15 +1,20 @@
 var actions = require('../flux/actions');
+var History = require('react-router').History;
 var React = require('react');
 
 var LoginPage = React.createClass({
+
+  mixins: [ History ],
   
   loginUser: function(event) {
     event.preventDefault();
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
     var accInfo = {username: username, password: password};
-
-    actions.loginUser(accInfo);
+    
+    // Passing in this (the component) to the action creator so we 
+    // can navigate to the home page upon sign up
+    actions.loginUser(accInfo, this);
   },
 
   render: function() {

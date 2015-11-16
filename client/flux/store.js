@@ -14,9 +14,12 @@ the application's state.
 */
 var _store = {
   user: {
-    name: 'kurt',
-    accounts: ['facebook'],
-    orgs: [{name: 'HR34', code: 'hr34'}],
+    // username: 'kurt',
+    // accounts: ['facebook'],
+    // orgs: [{name: 'HR34', code: 'hr34'}],
+    username: '',
+    accounts: [],
+    orgs: [],
   },
   organization: {
     code: 'hr34',
