@@ -19,7 +19,10 @@ var UserPageOrg = React.createClass({
 
     return (
       <div onClick={this.handleClick}>
+        <a>
+        <img className="account" src="/assets/hr.png"></img><br/>
         {this.props.name}
+        </a>
       </div>
     )
   }
