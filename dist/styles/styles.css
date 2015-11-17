@@ -70,6 +70,7 @@ a:hover {
   color: white;
 }
 
+
 a:link {
   color: black;
 }
@@ -80,6 +81,15 @@ a:link {
   min-height: 120px;
   margin: 15px;
   float: left;
+}
+
+.asdf {
+  border-radius: 100px;
+  max-height: 120px;
+  min-height: 120px;
+  margin: 15px;
+  float: left;
+  margin-left: 150px;
 }
 
 input {
