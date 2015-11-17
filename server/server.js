@@ -13,6 +13,7 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var methodOverride = require('method-override');
+var async = require('async');
 var Q = require('q');
 var jwt = require('jwt-simple');
 
@@ -84,8 +85,6 @@ passport.use(new FacebookStrategy({
   },
   function(req, accessToken, refreshToken, profile, done) {
     process.nextTick(function () {
-      console.log("grabbed FB profile ", profile);
-      console.log("accessToken ", accessToken);
       return User.findOne({username: loggedInUser.username})
         .then(function (found){
           console.log("found ", found);
@@ -100,7 +99,6 @@ passport.use(new FacebookStrategy({
             return done(null, returned);
           });
         });
-      //Account.addAccount("username", "facebook", profile.profileUrl);
     });
   }
 ));
@@ -122,8 +120,6 @@ app.get('/auth/facebook', passport.authenticate('facebook'), function (req,res) 
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', {failureRedirect: '/api/login'}),
   function (req, res) {
-    console.log("prof", req.body);
-    console.log("res prof", res.body);
     res.redirect('/');
   }
 );
@@ -147,9 +143,20 @@ app.get('/api/orgs/:code', function (req, res, next) {
   Org.findOne({code: code})
     .then(function (foundOrg){
       if(foundOrg){
-        res.send({org: foundOrg});
-      } else {
-        res.send({error: "Organization not found"});
+        var callbacks = [];
+
+        foundOrg.users.forEach( function (uid) {
+          callbacks.push(function (cb){
+            User.findOne({_id: uid})
+              .then(function (userModel){
+                cb(null, userModel);
+              });
+          });
+        });
+
+        async.parallel(callbacks, function (err, results){
+          res.send({users: results, name: foundOrg.name, code: foundOrg.code});
+        });
       }
     });
 });
@@ -171,7 +178,7 @@ app.post('/api/signup', function (req, res, next) {
     function (err, newUser){
       //Hacky thing to add user to org on init
       Org.addOrg("Hack Reactor", "hr34", function (org){
-        Org.addUserToOrg(newUser, org.name);
+        Org.addUserToOrg(newUser._id, org.name);
       });
       //send back a valid token
       var token = jwt.encode(newUser, 'zinnober');
