@@ -20,11 +20,16 @@ var SignupPage = React.createClass({
   
   render: function() {
     return (
-      <div>
+      <div id="form">
         <form>
+          <br></br>
+          <br></br>
+          <h2>Signup</h2>
+          <br></br>
           <h4>Enter Email: <input id="email" type="text" placeholder="Email"></input></h4>
           <h4>Enter Username: <input id="username" type="text" placeholder="Username"></input></h4>
           <h4>Enter Password: <input id="password" type="text" placeholder="Password"></input></h4>
+          <br></br>
           <button onClick={this.signupUser}>Click me</button>
         </form>
       </div>

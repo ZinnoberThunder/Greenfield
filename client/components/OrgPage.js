@@ -40,7 +40,7 @@ var OrgPage = React.createClass({
 
 
     return (
-      <div>
+      <div id="orgTitle">
         <img id="profilePic" src="/assets/hr.png"></img>
         <h2>Welcome to {this.state.organization.name}</h2>
         <h2>Members</h2>
