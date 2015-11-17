@@ -32,8 +32,8 @@ var Account = require('./db/models/account');
 
 var app = express();
 var port = process.env.PORT || 8000;
-var FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID || '793916147386968';
-var FACEBOOK_APP_SECRET = process.env.FACEBOOK_APP_SECRET || '268975de03f6b689fbffbf182d9281a5';
+var FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID || '';
+var FACEBOOK_APP_SECRET = process.env.FACEBOOK_APP_SECRET || '';
 
 //
 //  Middleware
@@ -80,7 +80,7 @@ passport.use(new FacebookStrategy({
     passReqToCallback: true,
     clientID: FACEBOOK_APP_ID,
     clientSecret: FACEBOOK_APP_SECRET,
-    callbackURL: "http://localhost:8000/auth/facebook/callback"/*"http://zthunder.herokuapp.com/auth/facebook/callback"*/,
+    callbackURL: "http://zthunder.herokuapp.com/auth/facebook/callback",
     profileFields: ['email', 'profileUrl', 'id', 'displayName', 'photos']
   },
   function(req, accessToken, refreshToken, profile, done) {
