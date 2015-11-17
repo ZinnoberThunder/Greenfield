@@ -108,7 +108,7 @@ var actions = {
       },
       success: function(res) {
         console.log(res);
-        actions.loadOrg(res.org);
+        actions.loadOrg(res);
       }
     });
   },

@@ -44,7 +44,7 @@ var OrgPage = React.createClass({
         <img id="profilePic" src="/assets/hr.png"></img>
         <h2>Welcome to {this.state.organization.name}</h2>
         <h2>Members</h2>
-        <OrgPageMemberList organization={this.state.organization} />
+        <OrgPageMemberList users={this.state.organization.users} />
       </div>
     )
   }

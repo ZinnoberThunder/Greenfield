@@ -21,7 +21,7 @@ var UserPageAccountList = React.createClass({
               this.props.accounts.map(function(account){
                 return (
                   <div>
-                  <a href={account.url}><img className="account" src="assets/facebook.png"></img></a>
+                  <a href={account.url}><img className="account" src="/assets/facebook.png"></img></a>
                   <UserPageAccount key={account.name} account={account.name}/>
                   </div>
                 )
