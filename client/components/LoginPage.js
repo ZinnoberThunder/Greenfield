@@ -29,7 +29,10 @@ var LoginPage = React.createClass({
           <br></br>
           <h4>Enter Username: <input id="username" type="text" placeholder="Username"></input></h4>
           <h4>Enter Password: <input id="password" type="text" placeholder="Password"></input></h4>
-          <button onClick={this.loginUser}>Click me</button><br/>
+          <br/>
+          <button onClick={this.loginUser}>Sign in</button>
+          <br/>
+          <br/>
           <button><Link to="/signup">Click to sign up</Link></button>
         </form>
       </div>

@@ -1,6 +1,7 @@
 body {
   text-align: center;
   background-image: url("../assets/triangular.png");
+  color: white;
 }
 
 #logo {
@@ -14,6 +15,7 @@ body {
   margin: 20px;
 }
 
+
 .bar {
   background-color: blue;
   color: blue;
@@ -23,6 +25,7 @@ body {
   border-radius: 100px;
   max-height: 120px;
   margin-top: 30px;
+  min-height: 120px;
 }
 
 .username {
@@ -33,31 +36,18 @@ body {
 
 #form {
   height: 350px;
-  margin-left: 400px;
+  width: 400px;
   margin-top: 150px;
-  margin-right: 400px;
+  margin-left: auto;
+  margin-right: auto;
   border-radius: 50px;
   background-color: #808080;
+  box-shadow: 2px 2px 2px black;
+
 }
 
 .account {
   max-height: 80px;
-}
-
-h1 {
-  color: white;
-}
-
-h2 {
-  color: white;
-}
-
-h3 {
-  color: white;
-}
-
-h4 {
-  color: white;
 }
 
 .orgAccount {
@@ -65,11 +55,14 @@ h4 {
 }
 
 .accounts {
-  margin: 40px;
+  margin-right: 100px;
+  margin-left: 100px;
+  margin-top: 30px;
   border-radius: 20px;
   border: 40px;
   background-color: #808080;
   height: 150px;
+  box-shadow: 2px 2px 2px black;
 }
 
 a:hover {
@@ -81,10 +74,36 @@ a:link {
   color: black;
 }
 
-
 .profPic {
   border-radius: 100px;
   max-height: 120px;
+  min-height: 120px;
   margin: 15px;
   float: left;
+}
+
+input {
+  color: #808080;
+}
+
+.fbLogin {
+  color: #3b5998;
+}
+
+.fbLogin:hover {
+  color: white;
+}
+
+button {
+  border-radius: 10px;
+  background-color: #D2D7D3;
+  border: 0;
+  box-shadow: 2px 2px 2px black;
+  width: 130px;
+}
+
+#logout {
+  position: relative;
+  left: 40%;
+  top: 30px;
 }

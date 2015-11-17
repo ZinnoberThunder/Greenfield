@@ -11,20 +11,19 @@ var UserPageAccountList = React.createClass({
 
   render: function() {
 
-    var accountNodes = this.props.accounts.map(function(account){
-      return (
-        <UserPageAccount key={account} account={account}/>
-      );
-    });
-
     return (
       <div className="accounts">
-        <h2 className="accountTitle">Accounts</h2>
-        <img className="account" src="assets/facebook.png"></img>
+      <h2 className="accountTitle">Accounts</h2>
+            {
+              this.props.accounts.length === 0 && <a href="/auth/facebook"><h2 className="fbLogin">Log in with<br/>Facebook</h2></a>
+            }
             {
               this.props.accounts.map(function(account){
                 return (
-                  <UserPageAccount key={account} account={account}/>
+                  <div>
+                  <a href={account.url}><img className="account" src="assets/facebook.png"></img></a>
+                  <UserPageAccount key={account.name} account={account.name}/>
+                  </div>
                 )
               })
             }
