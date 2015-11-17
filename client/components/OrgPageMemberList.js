@@ -11,7 +11,7 @@ var OrgPageMemberList = React.createClass({
           return (
             <div className="accounts">
               <OrgPageMember key={member.username} name={member.username} accounts={member.accounts} />
-              <img className="asdf" src={member.accounts[0].imgLink}></img>
+              <img className="asdf" src={member.accounts[0] && member.accounts[0].imgLink}></img>
               <h2 className="username">{member.username}</h2>
               {
                 member.accounts.map(function(account){
