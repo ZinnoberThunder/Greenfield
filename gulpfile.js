@@ -87,14 +87,14 @@ gulp.task('copy:html', function() {
 // A simple gulp task to copy the css styles folder to the 
 // dist folder upon each build
 gulp.task('copy:css', function() {
-    gulp.src('./styles/*.css')
+    gulp.src('./client/styles/*.css')
     .pipe(gulp.dest('./dist/styles'));
 });
 
 // A simple gulp task to copy the assets (PNGs) to the 
 // dist folder upon each build
 gulp.task('copy:assets', function() {
-    gulp.src('./assets/*.png')
+    gulp.src('./client/assets/*.png')
     .pipe(gulp.dest('./dist/assets'));
 });
 

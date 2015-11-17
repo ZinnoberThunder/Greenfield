@@ -11,21 +11,20 @@ You can have multiple stores, each which can hold a different
 part of the state and have different components listening to
 them and updating their state based on store changes. In this
 case, we have only one store which is holding the entirety of
-the application's state.
+the application's state. We can set the initial state here. We
+have set initial state to be blank values. The UserPage and 
+OrgPage will fetch this store when they initialize and call 
+their getInitialState methods. These two components will also
+fetch this state whenever there is a change event emitted from
+this store.
 */
 var _store = {
   user: {
-    // username: 'kurt',
-    // accounts: ['facebook'],
-    // orgs: [{name: 'HR34', code: 'hr34'}],
     username: '',
     accounts: [],
     orgs: [],
   },
   organization: {
-    // code: 'hr34',
-    // name: 'HR34',
-    // members: [{name: 'Kurt Weiberth', accounts: [{name: 'facebook', url: 'http://facebook.com/kurtweiberth'}]}]
     code: '',
     name: '',
     users: []

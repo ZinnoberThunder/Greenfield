@@ -18,18 +18,20 @@ in JSX syntax, which will be found in the render method for each component in th
 JSX allows you to write HTML-like syntax within your Javascript. The babelify/browserify
 build step will compile the JSX into Javascript.
 
-Here we have a Router component as our top-level component. The router will help client-side
+Here we have a Router component as our top-level component. The router will provide client-side
 navigation. The history attribute is important, as it will allow the Router to keep track and
 change the url as navigation progresses through the app. If the user refreshes the page (e.g.
-with a url like /org/hr34), our server will just serve the index.html. This will reload the app
-like normally, and the Router (it's history prop) will know what the url is, and render the 
-correct components based on the Route components we define here within it. 
+with a url like /org/hr34), our server will just serve the index.html (see app.get('*',...) in 
+the server file. This will reload the app like normally, and the Router (it's history prop) will
+know what the url is, and render the correct components based on the Route components we define 
+within it. 
 
 The :orgName param in the '/org/:orgName' allows you to pull out the param of orgName from the
 url so that we know which organization info to load when we render the OrgPage component. The 
 Router will pull out the param and pass it down to the component as a prop. So, for instance, if
-the user navigates to /org/hr34, the OrgPage component will render and have a
-this.props.params.orgName property that will be hr34. 
+the user navigates to /org/hr34, the OrgPage component will begin to render and have a
+this.props.params.orgName property that will be hr34. Then, we will fetch this data from the server
+and the component will then be able to update with the org info.
 */
 ReactDOM.render(
   <Router history={createHistory()}>

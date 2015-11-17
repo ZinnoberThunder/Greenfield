@@ -161,6 +161,17 @@ app.get('/api/orgs/:code', function (req, res, next) {
     });
 });
 
+/*
+This catch-all route is needed because we are handling routing on
+the client side. If a user refreshes the page, or goes to a specific url,
+we serve up the index.html. This effectively reloads the entire app, but
+the Router component (its history prop) will read the url and know which
+components to render. There was a bug when trying to handle the /org/orgName
+route, since the index was then looking for bundle.js at {directory}/org/bundle.js.
+So, we added a hacky fix that looks to see if the req url is org/bundle.js, and 
+if it is we serve up the bundle. You may need to better fix this if you end up
+having more routes in your app, or the requests become more complicated.
+*/
 app.get('*', function (request, response){
   if (request.url === '/org/bundle.js') {
     response.sendFile(path.resolve(__dirname, '..', 'dist', 'bundle.js'));
@@ -208,33 +219,3 @@ app.post('/api/createOrg', function (req, res, next) {
 
 app.listen(port);
 console.log('Server now listening on port ' + port);
-
-//
-//  Auth functions
-//
-
-
-function checkAuth (req, res, next) {
-    // checking to see if the user is authenticated
-    // grab the token in the header is any
-    // then decode the token, which we end up being the user object
-    // check to see if that user exists in the database
-    var token = req.headers['x-access-token'];
-    if (!token) {
-      next(new Error('No token'));
-    } else {
-      var user = jwt.decode(token, 'secret');
-      var findUser = Q.nbind(User.findOne, User);
-      findUser({username: user.username})
-        .then(function (foundUser) {
-          if (foundUser) {
-            res.send(200);
-          } else {
-            res.send(401);
-          }
-        })
-        .fail(function (error) {
-          next(error);
-        });
-    }
-  }

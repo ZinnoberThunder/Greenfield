@@ -14,7 +14,7 @@ var SignupPage = React.createClass({
     var accInfo = {email: email, username: username, password: password};
 
     // Passing in this (the component) to the action creator so we 
-    // can navigate to the home page upon sign up
+    // can navigate to the home page from actions
     actions.signupUser(accInfo, this);
   },
   

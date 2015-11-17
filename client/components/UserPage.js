@@ -36,7 +36,7 @@ var UserPage = React.createClass({
 
   componentWillUnmount: function(){
     /*
-    This method is called eahc time the component is
+    This method is called each time the component is
     removed from the page. This will happen when the user
     navigates to another Route. We remove our event 
     listening to the store's changes.
